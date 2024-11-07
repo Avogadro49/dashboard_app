@@ -2,23 +2,17 @@
 from flask import jsonify, request, abort
 from app.models.teacher import Teacher
 from app.schemas.teacher_schema import TeacherSchema
+from app.services.teacher_service import TeacherService
 from app.utils import db
+from sqlalchemy.exc import SQLAlchemyError
 
 class TeacherController:
     @staticmethod
     def store():
         try:
             teacher_schema = TeacherSchema()
-            new_teacher = teacher_schema.load(request.json)
-            serialize_teacher = teacher_schema.dump(new_teacher)
-            # Extract in services
-            teacher = Teacher(
-                    name=serialize_teacher["name"],
-                    email=serialize_teacher["email"],
-                    phone=serialize_teacher["phone"],
-                    avatar=serialize_teacher.get("avatar"))
-            db.session.add(teacher)
-            db.session.commit()
+            new_teacher_data = teacher_schema.load(request.json)
+            new_teacher = TeacherService.create_teacher(new_teacher_data)
             return teacher_schema.dump(new_teacher), 201
         except Exception as e:
             db.session.rollback()
@@ -26,9 +20,12 @@ class TeacherController:
 
     @staticmethod
     def index():
-        teachers = Teacher.query.all()
-        teachers_schema = TeacherSchema(many=True)
-        return teachers_schema.dump(teachers)
+        try:
+            teachers = Teacher.query.all()
+            teachers_schema = TeacherSchema(many=True)
+            return teachers_schema.dump(teachers)
+        except SQLAlchemyError as e:
+            return jsonify({"error": "Database error occurred", "details": str(e)})
 
     @staticmethod
     def show(teacher_id):
@@ -40,15 +37,11 @@ class TeacherController:
 
     @staticmethod
     def update(teacher_id):
-        teacher = Teacher.query.get(teacher_id)
-        if teacher is None:
-            abort(404)
-
         try:
+            teacher_data = request.json
+            updated_teacher = TeacherService.update_teacher(teacher_id, teacher_data)
             teacher_schema = TeacherSchema()
-            updated_teacher = teacher_schema.load(request.json, instance=teacher)
-            db.session.commit()
-            return teacher_schema.jsonify(updated_teacher)
+            return teacher_schema.dump(updated_teacher), 200
         except Exception as e:
             db.session.rollback()
             return jsonify({"error": str(e)}), 400
