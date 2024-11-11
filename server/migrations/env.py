@@ -44,6 +44,9 @@ target_db = current_app.extensions['migrate'].db
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
+from app.models.teacher import Teacher
+from app.models.college import College
+from app.models.profession import Profession
 
 def get_metadata():
     if hasattr(target_db, 'metadatas'):

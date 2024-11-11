@@ -1,4 +1,5 @@
 from marshmallow import Schema, fields
+# from app.schemas.collage_schema import CollageSchema
 
 class TeacherSchema(Schema):
     id = fields.Int(dump_only=True)
@@ -7,6 +8,9 @@ class TeacherSchema(Schema):
     phone = fields.Int(required=True)
     avatar = fields.Str(allow_none=True)
 
-class Meta:
-    load_instance = True
-    include_fk = True
+    # Nested field for associated collages
+    # collages = fields.List(fields.Nested(CollageSchema), dump_only=True)
+
+    class Meta:
+        load_instance = True
+        include_fk = True

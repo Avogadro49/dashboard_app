@@ -55,3 +55,5 @@ class TeacherController:
         db.session.delete(teacher)
         db.session.commit()
         return jsonify({"message": "Teacher deleted successfully."}), 204
+    
+    
