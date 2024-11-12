@@ -9,3 +9,4 @@ teacher_bp.add_url_rule('/teachers', view_func=TeacherController.index, methods=
 teacher_bp.add_url_rule('/teachers/<int:teacher_id>', view_func=TeacherController.show, methods=['GET'])
 teacher_bp.add_url_rule('/teachers/<int:teacher_id>', view_func=TeacherController.update, methods=['PUT'])
 teacher_bp.add_url_rule('/teachers/<int:teacher_id>', view_func=TeacherController.delete, methods=['DELETE'])
+

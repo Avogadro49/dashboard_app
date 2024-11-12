@@ -1,6 +1,6 @@
 from app.utils import db
 # from app.models.teacher_collage import teacher_collage
-from app.models.teacher import teacher_collage
+from app.models.teacher import teacher_college
 
 class College(db.Model):
     __tablename__ = 'colleges'
@@ -12,4 +12,4 @@ class College(db.Model):
     logo = db.Column(db.String(255), nullable=False)
 
     # Relationship to Teacher model through the TeacherCollage table
-    teachers = db.relationship('Teacher', secondary=teacher_collage, back_populates='colleges')
+    teachers = db.relationship('Teacher', secondary=teacher_college, back_populates='colleges')

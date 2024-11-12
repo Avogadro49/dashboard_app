@@ -10,7 +10,8 @@ class CollegeSchema(Schema):
     logo = fields.Str(allow_none=True)
 
     # Nested field for associated teachers
-    # teachers = fields.List(fields.Nested(TeacherSchema), dump_only=True)
+    teachers = fields.List(fields.Nested("TeacherSchema", only=("id", "name", 'email')), dump_only=True)
+
     class Meta:
         load_instance = True
         include_fk = True
