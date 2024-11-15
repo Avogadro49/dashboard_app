@@ -1,4 +1,5 @@
 from app.utils import db
+from app.models.module import teacher_module
 # from app.models.teacher_collage import teacher_collage
 
 
@@ -17,6 +18,7 @@ class Teacher(db.Model):
     phone = db.Column(db.BigInteger, nullable=False)
     avatar = db.Column(db.String(255), nullable=True)
 
-    # Relationship to Collage model through the TeacherCollage table
+    # Relationship to associated model through the associated tables =>
     colleges = db.relationship('College', secondary=teacher_college, back_populates='teachers')
+    modules = db.relationship("Modules", secondary=teacher_module, back_populates="teachers")
 

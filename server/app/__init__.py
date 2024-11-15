@@ -9,16 +9,17 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object('app.config.Config')
     
+    # => mount routes
     app.register_blueprint(teacher_bp)
     app.register_blueprint(college_bp)
     app.register_blueprint(teacher_college_bp)
 
     # print("Database URI:", app.config['SQLALCHEMY_DATABASE_URI'])
-    # Initialize extensions
+    # => Initialize extensions
     db.init_app(app)
     ma.init_app(app)
 
-    # Initialize Flask-migrate
+    # => Initialize Flask-migrate
     migrate.init_app(app, db)
 
     return app

@@ -47,6 +47,7 @@ target_db = current_app.extensions['migrate'].db
 from app.models.teacher import Teacher
 from app.models.college import College
 from app.models.profession import Profession
+from app.models.module import Module
 
 def get_metadata():
     if hasattr(target_db, 'metadatas'):

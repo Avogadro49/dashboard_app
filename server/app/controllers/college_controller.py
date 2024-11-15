@@ -38,22 +38,15 @@ class CollegeController:
         return college_schema.dump(college)
     
     @staticmethod
-
     def update(college_id):
-        data = request.get_json()
-        schema = CollegeSchema()
-        college = College.query.get(college_id)
-        if college:
-    
-            college = schema.load(data, instance=college, partial=True)
-            try:
-                db.session.commit()
-                result = schema.dump(college)  
-                return jsonify(result)
-            except Exception as e:
-                db.session.rollback()
-                return jsonify({"error": str(e)}), 500
-        return jsonify({"error": "College not found"}), 404
+        try:
+            college_data = request.json
+            updated_college = CollegeService.update_college(college_id, college_data)
+            college_schema = CollegeSchema()
+            return college_schema.dump(updated_college), 200
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"error": str(e)}), 400
 
     @staticmethod
     def delete(college_id):

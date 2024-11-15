@@ -10,6 +10,7 @@ class TeacherSchema(Schema):
 
     # Nested field for associated collages
     colleges = fields.List(fields.Nested("CollegeSchema", only=("id", "name")), dump_only=True)
+    modules = fields.List(fields.Nested('ModuleSchema', only=("id", "name")), dump_only=True)
 
     class Meta:
         load_instance = True
