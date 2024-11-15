@@ -14,4 +14,11 @@ class College(db.Model):
 
     # Relationship to associated model through the associated tables =>
     teachers = db.relationship('Teacher', secondary=teacher_college, back_populates='colleges')
-    professions = db.relationship('Profession', secondary=college_profession, back_populates='colleges')
+    # professions = db.relationship('Profession', secondary=college_profession, back_populates='colleges')
+    professions = db.relationship(
+        'Profession',
+        secondary=college_profession,
+        primaryjoin="College.id == college_profession.c.college_id",
+        secondaryjoin="Profession.id == college_profession.c.profession_id",
+        back_populates='colleges'
+    )

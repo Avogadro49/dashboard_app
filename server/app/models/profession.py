@@ -15,5 +15,12 @@ class Profession(db.Model):
     code = db.Column(db.SmallInteger, nullable=False)
 
     # Relationship to associated model through the associated tables =>
-    colleges = db.relationship('Teacher', secondary=college_profession, back_populates='professions')
-    modules = db.relationship('Modules', secondary=module_profession, back_populates='professions')
+    # colleges = db.relationship('Teacher', secondary=college_profession, back_populates='professions')
+    colleges = db.relationship(
+        'College',
+        secondary=college_profession,
+        primaryjoin="Profession.id == college_profession.c.profession_id",
+        secondaryjoin="College.id == college_profession.c.college_id",
+        back_populates='professions'
+    )
+    modules = db.relationship('Module', secondary=module_profession, back_populates='professions')

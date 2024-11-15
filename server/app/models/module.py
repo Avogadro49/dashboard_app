@@ -20,5 +20,12 @@ class Module(db.Model):
     code = db.Column(db.Integer, nullable=False)
 
     # Relationship to associated model through the associated tables =>
-    teachers = db.relationship('Teachers', secondary=teacher_module, back_populates='modules')
-    profession = db.relationship('Profession', secondary=module_profession, back_populates='modules')
+    teachers = db.relationship('Teacher', secondary=teacher_module, back_populates='modules')
+    # profession = db.relationship('Profession', secondary=module_profession, back_populates='modules')
+    professions = db.relationship(
+        'Profession',
+        secondary=module_profession,
+        primaryjoin="Module.id == module_profession.c.module_id",
+        secondaryjoin="Profession.id == module_profession.c.profession_id",
+        back_populates='modules'
+    )

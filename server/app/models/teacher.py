@@ -20,5 +20,5 @@ class Teacher(db.Model):
 
     # Relationship to associated model through the associated tables =>
     colleges = db.relationship('College', secondary=teacher_college, back_populates='teachers')
-    modules = db.relationship("Modules", secondary=teacher_module, back_populates="teachers")
+    modules = db.relationship('Module', secondary=teacher_module, back_populates='teachers')
 
