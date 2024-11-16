@@ -5,8 +5,8 @@ from app.controllers.association_controller import AssociationController
 class CollegeProfessionController:
     @staticmethod
     def store():
-        return AssociationController.store(College, Profession, 'college')
+        return AssociationController.store(College, Profession, 'professions')
     
     @staticmethod
     def delete():
-        return AssociationController.delete(College, Profession, 'college')
+        return AssociationController.delete(College, Profession, 'professions')
