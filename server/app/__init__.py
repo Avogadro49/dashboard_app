@@ -8,6 +8,7 @@ from app.routes.teacher_college_routes import teacher_college_bp
 from app.routes.college_profession_routes import college_profession_bp
 from app.routes.module_profession_route import module_profession_bp
 from app.routes.teacher_module_routes import teacher_module_bp
+from app.routes.group_routes import group_bp
 from app.utils import db, ma, migrate, cors
 from flasgger import Swagger
 import yaml
@@ -24,6 +25,7 @@ def create_app():
     app.register_blueprint(college_bp, url_prefix='/api/v1/colleges')
     app.register_blueprint(profession_bp)
     app.register_blueprint(module_bp)
+    app.register_blueprint(group_bp, url_prefix='/api/v1/groups')
     app.register_blueprint(teacher_college_bp)
     app.register_blueprint(college_profession_bp)
     app.register_blueprint(module_profession_bp)
