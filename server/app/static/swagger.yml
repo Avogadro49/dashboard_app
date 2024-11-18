@@ -1,0 +1,262 @@
+swagger: "2.0"
+info:
+  title: "Dashboard App API"
+  # description: "API for managing Teachers and Colleges."
+  version: "1.0.0"
+host: "127.0.0.1:8000"
+schemes:
+  - "http"
+basePath: "/api/v1"
+paths:
+  /teachers:
+    post:
+      tags:
+        - "Teachers"
+      summary: "Create a new teacher"
+      description: "Add a new teacher to the database."
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/TeacherInput"
+      responses:
+        201:
+          description: "Teacher created successfully."
+          schema:
+            $ref: "#/definitions/Teacher"
+        400:
+          description: "Invalid input data."
+    get:
+      tags:
+        - "Teachers"
+      summary: "Retrieve all teachers"
+      description: "Fetch a list of all teachers."
+      responses:
+        200:
+          description: "A list of teachers."
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Teacher"
+        500:
+          description: "Database error occurred."
+  /teachers/{teacher_id}:
+    get:
+      tags:
+        - "Teachers"
+      summary: "Retrieve a specific teacher"
+      description: "Fetch details of a teacher by their ID."
+      parameters:
+        - name: teacher_id
+          in: path
+          required: true
+          type: integer
+          description: "ID of the teacher."
+      responses:
+        200:
+          description: "Details of the teacher."
+          schema:
+            $ref: "#/definitions/Teacher"
+        404:
+          description: "Teacher not found."
+    put:
+      tags:
+        - "Teachers"
+      summary: "Update a teacher"
+      description: "Modify details of an existing teacher."
+      parameters:
+        - name: teacher_id
+          in: path
+          required: true
+          type: integer
+          description: "ID of the teacher."
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/TeacherInput"
+      responses:
+        200:
+          description: "Teacher updated successfully."
+          schema:
+            $ref: "#/definitions/Teacher"
+        404:
+          description: "Teacher not found."
+    delete:
+      tags:
+        - "Teachers"
+      summary: "Delete a teacher"
+      description: "Remove a teacher from the database."
+      parameters:
+        - name: teacher_id
+          in: path
+          required: true
+          type: integer
+          description: "ID of the teacher."
+      responses:
+        204:
+          description: "Teacher deleted successfully."
+        404:
+          description: "Teacher not found."
+  /colleges:
+    post:
+      tags:
+        - "Colleges"
+      summary: "Create a new college"
+      description: "Add a new college to the database."
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/CollegeInput"
+      responses:
+        201:
+          description: "College created successfully."
+          schema:
+            $ref: "#/definitions/College"
+        400:
+          description: "Invalid input data."
+    get:
+      tags:
+        - "Colleges"
+      summary: "Retrieve all colleges"
+      description: "Fetch a list of all colleges."
+      responses:
+        200:
+          description: "A list of colleges."
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/College"
+        500:
+          description: "Database error occurred."
+  /colleges/{college_id}:
+    get:
+      tags:
+        - "Colleges"
+      summary: "Retrieve a specific college"
+      description: "Fetch details of a college by its ID."
+      parameters:
+        - name: college_id
+          in: path
+          required: true
+          type: integer
+          description: "ID of the college."
+      responses:
+        200:
+          description: "Details of the college."
+          schema:
+            $ref: "#/definitions/College"
+        404:
+          description: "College not found."
+    put:
+      tags:
+        - "Colleges"
+      summary: "Update a college"
+      description: "Modify details of an existing college."
+      parameters:
+        - name: college_id
+          in: path
+          required: true
+          type: integer
+          description: "ID of the college."
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/CollegeInput"
+      responses:
+        200:
+          description: "College updated successfully."
+          schema:
+            $ref: "#/definitions/College"
+        404:
+          description: "College not found."
+    delete:
+      tags:
+        - "Colleges"
+      summary: "Delete a college"
+      description: "Remove a college from the database."
+      parameters:
+        - name: college_id
+          in: path
+          required: true
+          type: integer
+          description: "ID of the college."
+      responses:
+        204:
+          description: "College deleted successfully."
+        404:
+          description: "College not found."
+definitions:
+  Teacher:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: "Unique ID of the teacher."
+      name:
+        type: string
+        description: "Name of the teacher."
+      email:
+        type: string
+        description: "Email of the teacher."
+      phone:
+        type: integer
+        description: "Phone number of the teacher."
+  TeacherInput:
+    type: object
+    required:
+      - name
+      - email
+      - phone
+    properties:
+      name:
+        type: string
+        description: "Name of the teacher."
+      email:
+        type: string
+        description: "Email of the teacher."
+      phone:
+        type: integer
+        description: "Phone number of the teacher."
+  College:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: "Unique ID of the college."
+      name:
+        type: string
+        description: "Name of the college."
+      location:
+        type: string
+        description: "Location of the college."
+      email:
+        type: string
+        description: "Email of the college."
+      phone:
+        type: integer
+        description: "Phone number of the college."
+  CollegeInput:
+    type: object
+    required:
+      - name
+      - location
+      - email
+      - phone
+    properties:
+      name:
+        type: string
+        description: "Name of the college."
+      location:
+        type: string
+        description: "Location of the college."
+      email:
+        type: string
+        description: "Email of the college."
+      phone:
+        type: integer
+        description: "Phone number of the college."

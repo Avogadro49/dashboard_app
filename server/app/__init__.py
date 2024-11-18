@@ -8,15 +8,20 @@ from app.routes.teacher_college_routes import teacher_college_bp
 from app.routes.college_profession_routes import college_profession_bp
 from app.routes.module_profession_route import module_profession_bp
 from app.routes.teacher_module_routes import teacher_module_bp
-from app.utils import db, ma, migrate
+from app.utils import db, ma, migrate, cors
+from flasgger import Swagger
+import yaml
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object('app.config.Config')
+    cors.init_app(app, resources={r"/": {'origins': "*"}}, supports_credentials=True)
+
+    swagger = Swagger(app, template_file="../app/static/swagger.yml")
     
     # => mount routes
-    app.register_blueprint(teacher_bp)
-    app.register_blueprint(college_bp)
+    app.register_blueprint(teacher_bp, url_prefix='/api/v1/teachers')
+    app.register_blueprint(college_bp, url_prefix='/api/v1/colleges')
     app.register_blueprint(profession_bp)
     app.register_blueprint(module_bp)
     app.register_blueprint(teacher_college_bp)

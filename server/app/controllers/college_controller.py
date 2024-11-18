@@ -34,7 +34,7 @@ class CollegeController:
         college = College.query.get(college_id)
         if college is None:
             abort(404)
-        college_schema = CollegeSchema
+        college_schema = CollegeSchema()
         return college_schema.dump(college)
     
     @staticmethod
