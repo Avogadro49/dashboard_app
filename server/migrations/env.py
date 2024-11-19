@@ -49,6 +49,7 @@ from app.models.college import College
 from app.models.profession import Profession
 from app.models.module import Module
 from app.models.group import Group
+from app.models.student import Student
 
 def get_metadata():
     if hasattr(target_db, 'metadatas'):
