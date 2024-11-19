@@ -4,6 +4,7 @@ from app.routes.teacher_routes import teacher_bp
 from app.routes.college_routes import college_bp
 from app.routes.profession_routes import profession_bp
 from app.routes.module_routes import module_bp
+from app.routes.student_routes import student_bp
 from app.routes.teacher_college_routes import teacher_college_bp
 from app.routes.college_profession_routes import college_profession_bp
 from app.routes.module_profession_route import module_profession_bp
@@ -26,6 +27,7 @@ def create_app():
     app.register_blueprint(profession_bp)
     app.register_blueprint(module_bp)
     app.register_blueprint(group_bp, url_prefix='/api/v1/groups')
+    app.register_blueprint(student_bp, url_prefix='/api/v1/students')
     app.register_blueprint(teacher_college_bp)
     app.register_blueprint(college_profession_bp)
     app.register_blueprint(module_profession_bp)

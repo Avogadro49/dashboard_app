@@ -11,6 +11,7 @@ class Group(db.Model):
     # Relationship with College
     # college = db.relationship('College', back_populates='groups', lazy=True)
     college = db.relationship('College', back_populates = "groups", lazy=True)
+    student = db.relationship('Student', back_populates = 'group', lazy=True)
     # profession = db.relationship('Profession', back_populates='groups', lazy=True)
 
     def __repr__(self):
