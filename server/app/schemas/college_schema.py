@@ -12,6 +12,7 @@ class CollegeSchema(Schema):
     # Nested field for associated Schemas =>
     teachers = fields.List(fields.Nested("TeacherSchema", only=("id", "name", 'email')), dump_only=True)
     professions = fields.List(fields.Nested("ProfessionSchema", only=("id", "name")), dump_only=True)
+    # groups = fields.List(fields.Nested("GroupSchema", only=("id", "group_number")), dump_only=True)
 
     class Meta:
         load_instance = True

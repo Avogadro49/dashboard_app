@@ -11,7 +11,7 @@ class GroupService:
             group = Group(
                 group_number=group_data["group_number"],
                 profession_id=group_data["profession_id"],
-                collage_id=group_data["collage_id"],
+                college_id=group_data["college_id"],
             )
             db.session.add(group)
             db.session.commit()

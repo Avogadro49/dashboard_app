@@ -12,9 +12,13 @@ class College(db.Model):
     phone = db.Column(db.BigInteger, nullable=False)
     logo = db.Column(db.String(255), nullable=False)
 
+
+    # Optional: Relationship with Group (one-to-many)
+    # groups = db.relationship('Group', back_populates='college', lazy=True)
+    groups = db.relationship('Group', back_populates = "college")
+
     # Relationship to associated model through the associated tables =>
     teachers = db.relationship('Teacher', secondary=teacher_college, back_populates='colleges')
-    # professions = db.relationship('Profession', secondary=college_profession, back_populates='colleges')
     professions = db.relationship(
         'Profession',
         secondary=college_profession,
