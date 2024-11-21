@@ -1,14 +1,16 @@
-from app.utils import db
+from flask import jsonify
+from server.app.utils.utils import db
 from app.models.college import College
 from app.schemas.college_schema import CollegeSchema
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import IntegrityError
 
 
 
 class CollegeService:
     @staticmethod
     def create_college(college_data):
-        try:
+        # try:
             college = College(
                 name=college_data["name"],
                 location=college_data['location'],
@@ -19,9 +21,12 @@ class CollegeService:
             db.session.add(college)
             db.session.commit()
             return college
-        except Exception as e:
-            db.session.rollback()
-            raise Exception(f"Error creating college: {str(e)}")
+        # except IntegrityError:
+        #     db.session.rollback()
+        #     return jsonify({"error": "A college with this email already exists!"}), 400
+        # except Exception as e:
+        #     db.session.rollback()
+        #     return jsonify({'error': str(e)}), 400
         
     @staticmethod
     def update_college(college_id, college_data):

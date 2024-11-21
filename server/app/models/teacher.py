@@ -1,4 +1,4 @@
-from app.utils import db
+from server.app.utils.utils import db
 from app.models.module import teacher_module
 # from app.models.teacher_collage import teacher_collage
 

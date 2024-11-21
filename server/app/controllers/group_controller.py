@@ -2,7 +2,7 @@ from flask import jsonify, request, abort
 from app.models.group import Group
 from app.schemas.group_schema import GroupSchema
 from app.services.group_service import GroupService
-from app.utils import db
+from server.app.utils.utils import db
 from sqlalchemy.exc import SQLAlchemyError
 
 

@@ -2,8 +2,9 @@ from flask import request, jsonify, abort
 from app.models.college import College
 from app.schemas.college_schema import CollegeSchema
 from app.services.college_service import CollegeService
-from app.utils import db
-from sqlalchemy.exc import SQLAlchemyError
+from server.app.utils.utils import db
+from app.errors.error_handler import ErrorHandler
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 
 class CollegeController:
@@ -15,9 +16,16 @@ class CollegeController:
             new_college_data = college_schema.load(request.json)
             new_college = CollegeService.create_college(new_college_data)
             return college_schema.dump(new_college), 201
+        # except IntegrityError:
+        #     db.session.rollback()
+        #     return jsonify({"error": "A college with this email already exists!"}), 400
+        except IntegrityError as e:
+            return ErrorHandler.integrity_error(e)
+        # except Exception as e:
+        #     db.session.rollback()
+        #     return jsonify({'error': str(e)}), 400
         except Exception as e:
-            db.session.rollback()
-            return jsonify({'error': str(e)})    
+            return ErrorHandler.generic_error(e)
     # displaying all colleges    
     @staticmethod
     def index():

@@ -1,4 +1,4 @@
-from app.utils import db
+from server.app.utils.utils import db
 from app.models.group import Group
 from app.schemas.group_schema import GroupSchema
 from sqlalchemy.exc import SQLAlchemyError

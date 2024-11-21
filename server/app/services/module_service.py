@@ -1,4 +1,4 @@
-from app.utils import db
+from server.app.utils.utils import db
 from app.models.module import Module
 from app.schemas.module_schema import ModuleSchema
 from sqlalchemy.exc import SQLAlchemyError

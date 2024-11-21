@@ -1,6 +1,6 @@
 from app.models.student import Student
 from app.schemas.student_schema import StudentSchema
-from app.utils import db
+from server.app.utils.utils import db
 from sqlalchemy.exc import SQLAlchemyError
 
 class StudentService:

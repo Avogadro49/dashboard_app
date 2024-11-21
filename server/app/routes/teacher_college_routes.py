@@ -6,5 +6,5 @@ from app.models.college import College
 
 teacher_college_bp = Blueprint('teacher_college', __name__)
 
-teacher_college_bp.route('/teacher_college',methods=['POST'], endpoint='store_teacher_college')(lambda: TeacherCollegeController.store())
-teacher_college_bp.route('/teacher_college',methods=['DELETE'], endpoint='delete_teacher_college')(lambda: TeacherCollegeController.delete())
+teacher_college_bp.route('/',methods=['POST'], endpoint='store_teacher_college')(lambda: TeacherCollegeController.store())
+teacher_college_bp.route('/',methods=['DELETE'], endpoint='delete_teacher_college')(lambda: TeacherCollegeController.delete())

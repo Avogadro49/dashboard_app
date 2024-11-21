@@ -1,4 +1,4 @@
-from app.utils import db
+from server.app.utils.utils import db
 
 class Group(db.Model):
     __tablename__ = "groups"

@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.utils import db
+from server.app.utils.utils import db
 from app.models.teacher import Teacher
 from app.models.college import College
 from app.controllers.association_controller import AssociationController

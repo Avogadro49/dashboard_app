@@ -2,7 +2,7 @@ from flask import jsonify, request, abort
 from app.models.module import Module
 from app.schemas.module_schema import ModuleSchema
 from app.services.module_service import ModuleService
-from app.utils import db
+from server.app.utils.utils import db
 from sqlalchemy.exc import SQLAlchemyError
 
 class ModuleController:

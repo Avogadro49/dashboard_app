@@ -1,4 +1,4 @@
-from app.utils import db
+from server.app.utils.utils import db
 from app.models.profession import Profession 
 from app.schemas.profession_schema import ProfessionSchema
 from sqlalchemy.exc import SQLAlchemyError

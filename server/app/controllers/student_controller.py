@@ -2,7 +2,7 @@ from flask import jsonify, request, abort
 from app.models.student import Student
 from app.schemas.student_schema import StudentSchema
 from app.services.student_service import StudentService
-from app.utils import db
+from server.app.utils.utils import db
 from sqlalchemy.exc import SQLAlchemyError
 
 
