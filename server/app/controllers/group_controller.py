@@ -2,8 +2,9 @@ from flask import jsonify, request, abort
 from app.models.group import Group
 from app.schemas.group_schema import GroupSchema
 from app.services.group_service import GroupService
-from app.utils.utils import db
-from sqlalchemy.exc import SQLAlchemyError
+from app.utils.extensions import db
+from app.utils.error_handler import ErrorHandler
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 
 class GroupController:
@@ -14,9 +15,15 @@ class GroupController:
             new_group_data = group_schema.load(request.json)
             new_group = GroupService.create_group(new_group_data)
             return group_schema.dump(new_group), 201
+        except IntegrityError as e:
+            db.session.rollback()
+            return ErrorHandler.integrity_error(e)
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            return ErrorHandler.sqlalchemy_error()
         except Exception as e:
             db.session.rollback()
-            return jsonify({"error": str(e)}), 400
+            return ErrorHandler.generic_error(e)
 
     
     @staticmethod
@@ -26,16 +33,21 @@ class GroupController:
             groups_schema = GroupSchema(many=True)
             return jsonify({ "data": groups_schema.dump(groups), "total": len(groups)})
         except SQLAlchemyError as e:
-            return jsonify({"error": "Database error occurred", "details": str(e)})
+            return ErrorHandler.sqlalchemy_error()
         
 
     @staticmethod
     def show(group_id):
-        group = Group.query.get(group_id)
-        if group is None:
-            abort(404)
-        group_schema = GroupSchema()
-        return group_schema.dump(group)
+        try:
+            group = Group.query.get(group_id)
+            if group is None:
+                abort(404)
+            group_schema = GroupSchema()
+            return group_schema.dump(group)
+        except SQLAlchemyError as e:
+            return ErrorHandler.sqlalchemy_error()
+        except Exception as e:
+            return ErrorHandler.generic_error(e)
     
     @staticmethod
     def update(group_id):
@@ -44,16 +56,28 @@ class GroupController:
             updated_group = GroupService.update_teacher(group_id, group_data)
             group_schema = GroupSchema()
             return group_schema.dump(updated_group), 200
+        except IntegrityError as e:
+            db.session.rollback()
+            return ErrorHandler.integrity_error(e)
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            return ErrorHandler.sqlalchemy_error()
         except Exception as e:
             db.session.rollback()
-            return jsonify({"error": str(e)}), 400
+            return ErrorHandler.generic_error(e)
         
     @staticmethod
     def delete(group_id):
-        group = Group.query.get(group_id)
-        if group is None:
-            abort(404)
-
-        db.session.delete(group)
-        db.session.commit()
-        return jsonify({"message": "Group deleted successfully."}), 204
+        try:
+            group = Group.query.get(group_id)
+            if group is None:
+                return ErrorHandler.not_found_error()
+            db.session.delete(group)
+            db.session.commit()
+            return jsonify({"message": "Group deleted successfully."}), 204
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            return ErrorHandler.sqlalchemy_error()
+        except Exception as e:
+            db.session.rollback()
+            return ErrorHandler.generic_error(e)

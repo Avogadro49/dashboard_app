@@ -1,4 +1,4 @@
-from app.utils.utils import db
+from app.utils.extensions import db
 
 teacher_module = db.Table(
     'teacher_module',

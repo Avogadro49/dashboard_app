@@ -2,7 +2,7 @@ from flask import request, jsonify, abort
 from app.models.profession import Profession
 from app.schemas.profession_schema import ProfessionSchema
 from app.services.profession_service import ProfessionService
-from app.utils.utils import db
+from app.utils.extensions import db
 from sqlalchemy.exc import SQLAlchemyError
 
 

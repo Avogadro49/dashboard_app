@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import NavBar from "../partials/NavBar";
 function Homepage() {
   return (
@@ -9,6 +9,10 @@ function Homepage() {
         <Text fontSize="xl" fontWeight="bold">
           Admin Panel
         </Text>
+        import { HStack, Text,Box } from "@chakra-ui/react";
+ 
+export default NavBar
+
       </Box> */}
       {/* Body */}
       <Flex flex="1">

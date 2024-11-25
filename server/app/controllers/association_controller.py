@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.utils.utils import db
+from app.utils.extensions import db
 
 class AssociationController:
     @staticmethod

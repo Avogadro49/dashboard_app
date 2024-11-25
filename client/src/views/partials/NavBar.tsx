@@ -1,11 +1,11 @@
-import { HStack, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
-const NavBar = () => {
-  return (
-    <HStack padding={"10px"}>
-      <Text>Hello</Text>
-    </HStack>
-  );
-};
-
-export default NavBar;
+const Navbar () => {
+    return (
+        <Box as="header" bg="blue.500" color="white" p={4}>
+          <Text fontSize="xl" fontWeight="bold">
+          Admin Panel 
+          </Text>
+      </Box>
+      );
+}

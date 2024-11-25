@@ -1,4 +1,4 @@
-from app.utils.utils import db
+from app.utils.extensions import db
 from app.models.teacher import Teacher
 from app.schemas.teacher_schema import TeacherSchema
 from sqlalchemy.exc import SQLAlchemyError
