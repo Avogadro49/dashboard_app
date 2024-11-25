@@ -2,7 +2,7 @@ from flask import jsonify, request, abort
 from app.models.teacher import Teacher
 from app.schemas.teacher_schema import TeacherSchema
 from app.services.teacher_service import TeacherService
-from server.app.utils.utils import db
+from app.utils.utils import db
 from sqlalchemy.exc import SQLAlchemyError
 
 
@@ -24,7 +24,7 @@ class TeacherController:
         try:
             teachers = Teacher.query.all()
             teachers_schema = TeacherSchema(many=True)
-            return teachers_schema.dump(teachers)
+            return jsonify({ "data": teachers_schema.dump(teachers), "total": len(teachers)})
         except SQLAlchemyError as e:
             return jsonify({"error": "Database error occurred", "details": str(e)})
 

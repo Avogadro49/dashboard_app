@@ -2,8 +2,8 @@ from flask import request, jsonify, abort
 from app.models.college import College
 from app.schemas.college_schema import CollegeSchema
 from app.services.college_service import CollegeService
-from server.app.utils.utils import db
-from app.errors.error_handler import ErrorHandler
+from app.utils.utils import db
+from app.utils.error_handler import ErrorHandler
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 
@@ -32,7 +32,8 @@ class CollegeController:
         try:
             colleges = College.query.all()
             colleges_schema = CollegeSchema(many=True)
-            return colleges_schema.dump(colleges)
+            return jsonify({ "data": colleges_schema.dump(colleges), "total": len(colleges)})
+
         except SQLAlchemyError as e:
             return jsonify({"error": "Database Error occurred", "details": str(e)})
         

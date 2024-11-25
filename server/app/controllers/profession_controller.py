@@ -2,7 +2,7 @@ from flask import request, jsonify, abort
 from app.models.profession import Profession
 from app.schemas.profession_schema import ProfessionSchema
 from app.services.profession_service import ProfessionService
-from server.app.utils.utils import db
+from app.utils.utils import db
 from sqlalchemy.exc import SQLAlchemyError
 
 
@@ -24,7 +24,7 @@ class ProfessionController:
         try:
             professions = Profession.query.all()
             profession_schema = ProfessionSchema(many=True)
-            return profession_schema.dump(professions)
+            return jsonify({ "data": profession_schema.dump(professions), "total": len(professions)})
         except SQLAlchemyError as e:
             return jsonify({'error': "Error occurred", "details": str(e)})
     

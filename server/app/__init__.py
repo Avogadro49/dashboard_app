@@ -10,7 +10,7 @@ from app.routes.college_profession_routes import college_profession_bp
 from app.routes.module_profession_route import module_profession_bp
 from app.routes.teacher_module_routes import teacher_module_bp
 from app.routes.group_routes import group_bp
-from server.app.utils.utils import db, ma, migrate, cors
+from app.utils.utils import db, ma, migrate, cors
 from flasgger import Swagger
 import yaml
 

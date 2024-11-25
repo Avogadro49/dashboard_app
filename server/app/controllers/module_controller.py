@@ -2,7 +2,7 @@ from flask import jsonify, request, abort
 from app.models.module import Module
 from app.schemas.module_schema import ModuleSchema
 from app.services.module_service import ModuleService
-from server.app.utils.utils import db
+from app.utils.utils import db
 from sqlalchemy.exc import SQLAlchemyError
 
 class ModuleController:
@@ -23,7 +23,8 @@ class ModuleController:
         try:
             modules = Module.query.all()
             module_schema = ModuleSchema(many=True)
-            return module_schema.dump(modules)
+            return jsonify({ "data": module_schema.dump(modules), "total": len(modules)})
+
         except SQLAlchemyError as e:
             return jsonify({"error": "Database error occurred", "details": str(e)})
 

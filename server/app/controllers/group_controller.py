@@ -2,7 +2,7 @@ from flask import jsonify, request, abort
 from app.models.group import Group
 from app.schemas.group_schema import GroupSchema
 from app.services.group_service import GroupService
-from server.app.utils.utils import db
+from app.utils.utils import db
 from sqlalchemy.exc import SQLAlchemyError
 
 
@@ -24,7 +24,7 @@ class GroupController:
         try:
             groups = Group.query.all()
             groups_schema = GroupSchema(many=True)
-            return groups_schema.dump(groups)
+            return jsonify({ "data": groups_schema.dump(groups), "total": len(groups)})
         except SQLAlchemyError as e:
             return jsonify({"error": "Database error occurred", "details": str(e)})
         

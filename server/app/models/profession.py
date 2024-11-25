@@ -1,4 +1,4 @@
-from server.app.utils.utils import db
+from app.utils.utils import db
 from app.models.module import module_profession
 
 college_profession = db.Table(

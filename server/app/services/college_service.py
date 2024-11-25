@@ -1,5 +1,5 @@
 from flask import jsonify
-from server.app.utils.utils import db
+from app.utils.utils import db
 from app.models.college import College
 from app.schemas.college_schema import CollegeSchema
 from sqlalchemy.exc import SQLAlchemyError
