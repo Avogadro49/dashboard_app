@@ -22,7 +22,7 @@ const Sidemenu = () => {
     >
       <AccordionRoot collapsible defaultValue={["1"]}>
         {items.map((item, index) => (
-          <AccordionItem key={index} value={item.id}>
+          <AccordionItem key={index} value={item.id} bg="none" _hover={{ bg: "blue.950" }}>
             <AccordionItemTrigger fontSize="xl">
               {item.title}
             </AccordionItemTrigger>
