@@ -20,7 +20,7 @@ const Sidemenu = () => {
       p={4}
       display={{ base: "none", md: "block" }}
     >
-      <AccordionRoot collapsible defaultValue={["b"]}>
+      <AccordionRoot collapsible defaultValue={["1"]}>
         {items.map((item, index) => (
           <AccordionItem key={index} value={item.id}>
             <AccordionItemTrigger fontSize="xl">

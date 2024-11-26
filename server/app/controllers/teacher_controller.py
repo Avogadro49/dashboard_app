@@ -33,7 +33,7 @@ class TeacherController:
             teachers_schema = TeacherSchema(many=True)
             return jsonify({ "data": teachers_schema.dump(teachers), "total": len(teachers)})
         except SQLAlchemyError as e:
-            return ErrorHandler.sqlalchemy_error()
+            return ErrorHandler.sqlalchemy_error(e)
         
     @staticmethod
     def show(teacher_id):
@@ -60,7 +60,7 @@ class TeacherController:
             return ErrorHandler.integrity_error(e)
         except SQLAlchemyError as e:
             db.session.rollback()
-            return ErrorHandler.sqlalchemy_error()
+            return ErrorHandler.sqlalchemy_error(e)
         except Exception as e:
             db.session.rollback()
             return ErrorHandler.generic_error(e)

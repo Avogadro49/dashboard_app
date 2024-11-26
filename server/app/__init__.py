@@ -10,6 +10,7 @@ from app.routes.college_profession_routes import college_profession_bp
 from app.routes.module_profession_route import module_profession_bp
 from app.routes.teacher_module_routes import teacher_module_bp
 from app.routes.group_routes import group_bp
+from app.routes.app_route import app_bl
 from app.utils.extensions import db, ma, migrate, cors
 from flasgger import Swagger
 import yaml
@@ -24,6 +25,7 @@ def create_app():
 
     BASE_API_URL='/api/v1'
     # => mount routes
+    app.register_blueprint(app_bl)
     app.register_blueprint(teacher_bp, url_prefix=f'{BASE_API_URL}/teachers')
     app.register_blueprint(college_bp, url_prefix=f'{BASE_API_URL}/colleges')
     app.register_blueprint(profession_bp, url_prefix=f'{BASE_API_URL}/professions')
@@ -34,7 +36,7 @@ def create_app():
     app.register_blueprint(college_profession_bp, url_prefix=f'{BASE_API_URL}/college_profession')
     app.register_blueprint(module_profession_bp,url_prefix=f'{BASE_API_URL}/module_profession')
     app.register_blueprint(teacher_module_bp, url_prefix=f'{BASE_API_URL}/teacher_module')
-
+    
     # print("Database URI:", app.config['SQLALCHEMY_DATABASE_URI'])
     # => Initialize extensions
     db.init_app(app)
