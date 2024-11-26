@@ -1,13 +1,15 @@
+from flask import jsonify
 from app.utils.extensions import db
 from app.models.teacher import Teacher
 from app.schemas.teacher_schema import TeacherSchema
-from sqlalchemy.exc import SQLAlchemyError
+from app.utils.error_handler import ErrorHandler
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 
 class TeacherService:
     @staticmethod
     def create_teacher(teacher_data):
-        try:
+        # try:
             teacher = Teacher(
                 name=teacher_data["name"],
                 email=teacher_data["email"],
@@ -17,15 +19,15 @@ class TeacherService:
             db.session.add(teacher)
             db.session.commit()
             return teacher
-        except Exception as e:
-            db.session.rollback()
-            raise Exception(f"Error creating teacher: {str(e)}")
+        # except Exception as e:
+        #     db.session.rollback()
+        #     raise Exception(f"Error creating teacher: {str(e)}")
     
     def update_teacher(teacher_id, teacher_data):
         teacher = Teacher.query.get(teacher_id)
         
         if teacher is None:
-            raise ValueError("Teacher not found")
+            return jsonify({"message": "Teacher not found"})
         
         try:
             teacher_schema = TeacherSchema()
@@ -37,11 +39,12 @@ class TeacherService:
             db.session.commit()
 
             return updated_teacher
+        except IntegrityError as e:
+            db.session.rollback()
+            return ErrorHandler.integrity_error(e)
         except SQLAlchemyError as e:
             db.session.rollback()
-            raise Exception(f"Database error: {str(e)}")
-        except ValueError as e:
-            raise e
+            return ErrorHandler.sqlalchemy_error()
         except Exception as e:
             db.session.rollback()
-            raise Exception(f"Error updating teacher: {str(e)}")
+            return ErrorHandler.generic_error(e)

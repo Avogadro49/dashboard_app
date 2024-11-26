@@ -15,6 +15,7 @@ class ErrorHandler:
         #     return jsonify({"error": "A college with this name already exists!"}), 400
         
         # Fallback for general integrity errors
+        logging.error(f"IntegrityError: {str(e)}")
         return jsonify({"error": "A resource with a unique constraint already exists!"}), 400
 
     @staticmethod
@@ -40,14 +41,14 @@ class ErrorHandler:
         }), 404
 
     @staticmethod
-    def sqlalchemy_error():
+    def sqlalchemy_error(e):
         # Handle general SQLAlchemy errors.
         return jsonify({
             "error": "A database error occurred. Please try again later."
         }), 500
 
     @staticmethod
-    def generic_error():
+    def generic_error(e=None):
         # Handle all unexpected errors.
         return jsonify({
             "error": "An unexpected error occurred. Please try again later.",

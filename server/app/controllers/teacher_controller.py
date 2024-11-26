@@ -21,7 +21,7 @@ class TeacherController:
             return ErrorHandler.integrity_error(e)
         except SQLAlchemyError as e:
             db.session.rollback()
-            return ErrorHandler.sqlalchemy_error()
+            return ErrorHandler.sqlalchemy_error(e)
         except Exception as e:
             db.session.rollback()
             return ErrorHandler.generic_error(e)

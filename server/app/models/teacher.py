@@ -14,8 +14,8 @@ class Teacher(db.Model):
     __tablename__ = 'teachers'
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
-    email = db.Column(db.String(255), nullable=False)
-    phone = db.Column(db.BigInteger, nullable=False)
+    email = db.Column(db.String(255), nullable=False, unique=True)
+    phone = db.Column(db.BigInteger, nullable=False, unique=True)
     avatar = db.Column(db.String(255), nullable=True)
 
     # Relationship to associated model through the associated tables =>

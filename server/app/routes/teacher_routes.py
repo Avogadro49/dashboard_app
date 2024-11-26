@@ -4,8 +4,8 @@ from app.controllers.teacher_controller import TeacherController
 teacher_bp = Blueprint('teacher', __name__)
 
 # Define the routes and link them to controller methods
-teacher_bp.add_url_rule('/', view_func=TeacherController.store, methods=['POST'])
-teacher_bp.add_url_rule('/', view_func=TeacherController.index, methods=['GET'])
-teacher_bp.add_url_rule('/<int:teacher_id>', view_func=TeacherController.show, methods=['GET'])
-teacher_bp.add_url_rule('/<int:teacher_id>', view_func=TeacherController.update, methods=['PUT'])
-teacher_bp.add_url_rule('/<int:teacher_id>', view_func=TeacherController.delete, methods=['DELETE'])
+teacher_bp.route('/', methods=['POST'])(TeacherController.store)
+teacher_bp.route('/', methods=['GET'])(TeacherController.index)
+teacher_bp.route('/<int:teacher_id>', methods=['GET'])(TeacherController.show)
+teacher_bp.route('/<int:teacher_id>', methods=['PUT'])(TeacherController.update)
+teacher_bp.route('/<int:teacher_id>', methods=['DELETE'])(TeacherController.delete)

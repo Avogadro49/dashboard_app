@@ -15,9 +15,9 @@ module_profession = db.Table(
 class Module(db.Model):
     __tablename__ = 'modules'
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(255), nullable=False, unique=True)
     requirements = db.Column(db.String(255), nullable=False)
-    code = db.Column(db.Integer, nullable=False)
+    code = db.Column(db.Integer, nullable=False, unique=True)
 
     # Relationship to associated model through the associated tables =>
     teachers = db.relationship('Teacher', secondary=teacher_module, back_populates='modules')
