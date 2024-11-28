@@ -1,35 +1,35 @@
 // import React from "react";
-import { Text, Box, Card, Button, Flex, Image } from "@chakra-ui/react";
+import { Text, Card, Button, Flex, Image } from "@chakra-ui/react";
 
 const Home = () => {
   return (
-    <Box as="main" flex="1" p={4} bg="gray.100">
-      <Flex wrap="wrap" justifyContent="space-between">
-        {items.map((item, index) => (
-          <Card.Root maxW="sm" overflow="hidden" key={index}>
-            <Image aspectRatio={4 / 3} rounded="md" src={item.image} />
-            <Card.Body gap="2">
-              <Card.Title>{item.name}</Card.Title>
-              {/* <Card.Description>
+    // <Box as="main" flex="1" p={4} bg="gray.100">
+    <Flex wrap="wrap" justifyContent="space-between">
+      {items.map((item, index) => (
+        <Card.Root maxW="sm" overflow="hidden" key={index}>
+          <Image aspectRatio={4 / 3} rounded="md" src={item.image} />
+          <Card.Body gap="2">
+            <Card.Title>{item.name}</Card.Title>
+            {/* <Card.Description>
               This sofa is perfect for modern tropical spaces, baroque inspired
               spaces.
             </Card.Description> */}
-              <Text
-                textStyle="2xl"
-                fontWeight="medium"
-                letterSpacing="tight"
-                mt="2"
-              >
-                {item.total}
-              </Text>
-            </Card.Body>
-            <Card.Footer gap="2">
-              <Button variant="solid">View More</Button>
-            </Card.Footer>
-          </Card.Root>
-        ))}
-      </Flex>
-    </Box>
+            <Text
+              textStyle="2xl"
+              fontWeight="medium"
+              letterSpacing="tight"
+              mt="2"
+            >
+              {item.total}
+            </Text>
+          </Card.Body>
+          <Card.Footer gap="2">
+            <Button variant="solid">View More</Button>
+          </Card.Footer>
+        </Card.Root>
+      ))}
+    </Flex>
+    //</Box>
   );
 };
 

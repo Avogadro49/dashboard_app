@@ -18,7 +18,7 @@ import yaml
 def create_app():
     app = Flask(__name__)
     app.config.from_object('app.config.Config')
-    cors.init_app(app, resources={r"/": {'origins': "*"}}, supports_credentials=True)
+    cors.init_app(app, resources={r"/*": {'origins': "*"}}, supports_credentials=True)
 
     swagger = Swagger(app, template_file="../app/static/swagger.yml")
     

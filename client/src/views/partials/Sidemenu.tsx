@@ -1,7 +1,6 @@
 // import React from "react";
 import {
   Box,
-  Link,
   AccordionItem,
   AccordionItemContent,
   AccordionItemTrigger,
@@ -9,6 +8,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { FaRegEye, FaPlus } from "react-icons/fa";
+import { NavLink } from "react-router";
 
 const Sidemenu = () => {
   return (
@@ -22,21 +22,25 @@ const Sidemenu = () => {
     >
       <AccordionRoot collapsible defaultValue={["1"]}>
         {items.map((item, index) => (
-          <AccordionItem key={index} value={item.id} bg="none" _hover={{ bg: "blue.950" }}>
-            <AccordionItemTrigger fontSize="xl">
+          <AccordionItem
+            key={index}
+            value={item.id}
+            bg="none"
+            _hover={{ bg: "blue.950" }}
+          >
+            <AccordionItemTrigger fontSize="xl" cursor="pointer">
               {item.title}
             </AccordionItemTrigger>
             <AccordionItemContent>
               {item.links.map((link, index) => (
-                <Link
-                  display="flex"
-                  justifyContent="space-between"
+                <NavLink
+                  className={["router-link"].join(" ")}
                   key={index}
-                  href={link.path}
+                  to={link.path}
                 >
                   {link.text}
                   <Icon>{link.icon}</Icon>
-                </Link>
+                </NavLink>
               ))}
             </AccordionItemContent>
           </AccordionItem>
