@@ -28,7 +28,7 @@ class StudentService:
             raise ValueError("Student not found")
         
         try:
-            student_schema = StudentSchema()
+            student_schema = StudentSchema(partial=True)
             updated_student = student_schema.load(student_data)
 
             for key, value in updated_student.items():

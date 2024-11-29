@@ -29,7 +29,7 @@ class ModuleService:
             raise ValueError("Module not found")
         
         try:
-            module_schema = ModuleSchema()
+            module_schema = ModuleSchema(partial=True)
             updated_module = module_schema.load(module_data)
 
             for key, value in updated_module.items():

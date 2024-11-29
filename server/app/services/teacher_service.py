@@ -30,7 +30,7 @@ class TeacherService:
             return jsonify({"message": "Teacher not found"})
         
         try:
-            teacher_schema = TeacherSchema()
+            teacher_schema = TeacherSchema(partial=True)
             updated_teacher = teacher_schema.load(teacher_data)
             
             for key, value in updated_teacher.items():
@@ -41,10 +41,10 @@ class TeacherService:
             return updated_teacher
         except IntegrityError as e:
             db.session.rollback()
-            return ErrorHandler.integrity_error(e)
+            raise e
         except SQLAlchemyError as e:
             db.session.rollback()
-            return ErrorHandler.sqlalchemy_error()
+            raise Exception(f"Database error: {str(e)}")
         except Exception as e:
             db.session.rollback()
-            return ErrorHandler.generic_error(e)
+            raise Exception(f"Error updating teacher: {str(e)}")

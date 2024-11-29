@@ -36,7 +36,7 @@ class CollegeService:
             raise ValueError("College not found")
         
         try:
-            college_schema= CollegeSchema()
+            college_schema= CollegeSchema(partial=True)
             updated_college = college_schema.load(college_data)
 
             for key, value in updated_college.items():

@@ -29,7 +29,7 @@ class ProfessionService:
             raise ValueError("Profession not found")
         
         try:
-            profession_schema = ProfessionSchema()
+            profession_schema = ProfessionSchema(partial=True)
             updated_profession = profession_schema.load(profession_data)
 
             for key, value in updated_profession.items():
