@@ -1,5 +1,13 @@
 // import React from "react"
-import { Box, Image, Text, VStack, Flex, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Text,
+  VStack,
+  Flex,
+  Button,
+  HStack,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { TeacherType } from "../../types";
 
@@ -47,7 +55,10 @@ const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
             {teacher.phone}
           </Text>
           <Text color="gray.500">ID: {teacher.id}</Text>
-          <Button onClick={viewMore}>View More</Button>
+          <HStack width="100%">
+            <Button width="50%" onClick={viewMore}>View More</Button>
+            <Button width="50%" color="red">Delete</Button>
+          </HStack>
         </VStack>
       </Flex>
     </Box>

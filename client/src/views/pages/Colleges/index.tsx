@@ -13,6 +13,10 @@ const IndexColleges = () => {
       <Text fontSize="2xl" fontWeight="bold" marginBottom="4">
         Colleges
       </Text>
+      <img
+        src="https://res.cloudinary.com/dcu4dwbcu/image/upload/v1733137576/cooltext471028125677165_q1bba1.gif"
+        alt=""
+      />
       {responseData && responseData.data.length > 0 ? (
         <Flex direction="row" wrap="wrap" gap="4">
           {responseData.data.map((college) => (

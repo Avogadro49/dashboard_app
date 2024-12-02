@@ -8,6 +8,10 @@ export type TeacherType = {
   modules: ModulesType[];
 };
 
+export type TeacherResponse = {
+  data: TeacherType;
+};
+
 export type TeachersResponse = {
   data: TeacherType[];
   total: number;
