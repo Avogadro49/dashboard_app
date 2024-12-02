@@ -6,6 +6,8 @@ import {
   AccordionItemTrigger,
   AccordionRoot,
   Icon,
+  Text,
+  HStack,
 } from "@chakra-ui/react";
 import { FaRegEye, FaPlus } from "react-icons/fa";
 import { NavLink } from "react-router";
@@ -22,12 +24,7 @@ const Sidemenu = () => {
     >
       <AccordionRoot collapsible defaultValue={["1"]}>
         {items.map((item, index) => (
-          <AccordionItem
-            key={index}
-            value={item.id}
-            bg="none"
-            _hover={{ bg: "blue.950" }}
-          >
+          <AccordionItem key={index} value={item.id} bg="none">
             <AccordionItemTrigger fontSize="xl" cursor="pointer">
               {item.title}
             </AccordionItemTrigger>
@@ -38,8 +35,14 @@ const Sidemenu = () => {
                   key={index}
                   to={link.path}
                 >
-                  {link.text}
-                  <Icon>{link.icon}</Icon>
+                  <HStack
+                    justifyContent="space-between"
+                    alignItems="center"
+                    _hover={{ bg: "gray.900" }}
+                  >
+                    <Text marginY={1}>{link.text}</Text>
+                    <Icon marginY={1}>{link.icon}</Icon>
+                  </HStack>
                 </NavLink>
               ))}
             </AccordionItemContent>

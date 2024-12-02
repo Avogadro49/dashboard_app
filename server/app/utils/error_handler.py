@@ -3,21 +3,26 @@ from flask import jsonify
 from app.models.college import College
 
 
+
 class ErrorHandler:
     
     @staticmethod
     def integrity_error(e):
-        # Handle database integrity errors (e.g., duplicate entry).
-        # if "email" in str(e).lower():
-        #     print(str(e).lower())
-        #     return jsonify({"error": "A college with this email already exists!"}), 400
-        # if "name" in str(e).lower():
-        #     return jsonify({"error": "A college with this name already exists!"}), 400
-        
-        # Fallback for general integrity errors
+        if e.orig and e.orig.args[0] == 1062: 
+            if 'name' in str(e.orig):
+                return jsonify({"error": "name already exists!"}), 400
+            elif 'email' in str(e.orig):
+                return jsonify({"error": "email already exists!"}), 400
+            elif 'phone' in str(e.orig):
+                return jsonify({"error": "phone number already exists!"}), 400
+            elif 'code' in str(e.orig):
+                return jsonify({"error": "Code must be unique!"}), 400
+            elif 'location' in str(e.orig):
+                return jsonify({"error": "Location must be unique!"}), 400
+
+         # Fallback for general integrity errors
         logging.error(f"IntegrityError: {str(e)}")
         return jsonify({"error": "A resource with a unique constraint already exists!"}), 400
-
     @staticmethod
     def data_error():
         # Handle invalid data errors

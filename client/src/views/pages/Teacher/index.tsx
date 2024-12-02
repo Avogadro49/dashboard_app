@@ -17,6 +17,7 @@ const IndexTeachers = () => {
       <Text fontSize="2xl" fontWeight="bold" marginBottom="4">
         Teachers
       </Text>
+      <img src="https://res.cloudinary.com/dcu4dwbcu/image/upload/v1732886372/cooltext470876669822471_xvxhmm.gif" alt="" />
       {responseData && responseData.data.length > 0 ? (
         <Flex direction="row" wrap="wrap" gap="4">
           {responseData.data.map((teacher) => (

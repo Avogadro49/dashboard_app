@@ -22,7 +22,7 @@ const IndexColleges = () => {
       ) : (
         <Text>No college available</Text>
       )}
-      <Text>Total Colleges: {responseData?.total}</Text>
+      <Text marginBlock={5}>Total Colleges: {responseData?.total}</Text>
     </Box>
   );
 };

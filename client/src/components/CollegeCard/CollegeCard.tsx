@@ -30,6 +30,7 @@ const CollegeCard: React.FC<CollegeCardProps> = ({ college }) => {
         alt={college.name}
         width="100%"
         objectFit="cover"
+        aspectRatio="4/3"
       />
 
       <Stack p={4}>

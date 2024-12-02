@@ -22,7 +22,10 @@ const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
       boxShadow="lg"
       // width="50%"
       padding="4"
+      margin="auto"
       backgroundColor="white"
+      _hover={{ boxShadow: "xl", transform: "scale(1.05)" }}
+      transition="all 0.3s ease"
     >
       <Flex direction="column" align="center" justify="center">
         <Image
@@ -39,6 +42,9 @@ const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
           </Text>
           <Text fontWeight="bold" fontSize="lg">
             {teacher.email}
+          </Text>
+          <Text fontWeight="bold" fontSize="lg">
+            {teacher.phone}
           </Text>
           <Text color="gray.500">ID: {teacher.id}</Text>
           <Button onClick={viewMore}>View More</Button>
