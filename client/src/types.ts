@@ -51,8 +51,14 @@ export type ProfessionsType = {
   colleges: CollegesType[];
 };
 
+export type Link = {
+  text: string;
+  path: string;
+};
+
 export type DetailsType = {
   id: string;
   name: string;
+  links: Link[];
   total: number;
 };
