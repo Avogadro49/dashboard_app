@@ -38,7 +38,7 @@ export type ModulesType = {
   name: string;
   requirements: string;
   code: number;
-  teachers: [TeacherType];
+  teachers: TeacherType[];
   professions: [];
 };
 

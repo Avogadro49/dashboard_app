@@ -1,18 +1,9 @@
 // import React from "react"
-import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  SimpleGrid,
-  Spinner,
-  VStack,
-  Image,
-} from "@chakra-ui/react";
+import { Box, Container, Spinner, VStack } from "@chakra-ui/react";
 import { useParams } from "react-router";
 import { TeacherType } from "../../../types";
 import { useEffect, useState } from "react";
-// import { TeacherResponse } from "../../../types";
+import TeacherCard from "../../../components/TeacherCard/TeacherCard";
 
 const ShowTeachers = () => {
   const [teacher, setTeacher] = useState<TeacherType | null>(null);
@@ -23,7 +14,6 @@ const ShowTeachers = () => {
 
   const { id } = params;
   const url = [import.meta.env.VITE_API_URL, "teachers", id].join("/");
-  console.log(url);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -38,7 +28,6 @@ const ShowTeachers = () => {
         const data: TeacherType = await response.json();
 
         setTeacher(data);
-        console.log(data)
         setError(null);
       } catch (err) {
         if (signal.aborted) {
@@ -55,12 +44,10 @@ const ShowTeachers = () => {
     fetchData();
   }, [url]);
 
-  console.log(params.id);
   return (
     <Container maxW="container.md" py={6}>
-      <Box>
+      <Box display="flex" justifyContent="center">
         {error && <p>Error</p>}
-        {/* Teacher Avatar and Name */}
         {loading ? (
           <VStack justify="center" align="center" height="300px">
             <Spinner size="xl" />
@@ -68,24 +55,7 @@ const ShowTeachers = () => {
         ) : (
           teacher && (
             <>
-              {/* Teacher Avatar and Name */}
-              <SimpleGrid columns={[1, 2]} padding={3}>
-                <VStack align="start">
-                  <Image alt={teacher.name} src={teacher.avatar} />
-                  <Heading as="h1" size="xl" mt={4}>
-                    {teacher.name}
-                  </Heading>
-                  <Text color="gray.500">{teacher.email}</Text>
-                </VStack>
-
-                {/* Teacher Contact Info */}
-                <VStack align="start" paddingX={3}>
-                  <Text fontSize="lg" fontWeight="bold">
-                    Phone
-                  </Text>
-                  <Text>{teacher.phone}</Text>
-                </VStack>
-              </SimpleGrid>
+              <TeacherCard key={teacher.id} teacher={teacher} />
             </>
           )
         )}

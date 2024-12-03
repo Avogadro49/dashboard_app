@@ -1,5 +1,5 @@
 import { Box, Text, Flex } from "@chakra-ui/react";
-import TeacherCard from "../../../components/TeacherCard/TeacherCard";
+import TeacherCard from "../../../components/TeachersCard/TeachersCard";
 import useTeacherItem from "../../../hooks/useTeacherItem";
 // import { TeacherType } from "../../../types";
 
