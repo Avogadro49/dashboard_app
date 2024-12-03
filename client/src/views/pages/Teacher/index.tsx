@@ -1,5 +1,5 @@
 import { Box, Text, Flex } from "@chakra-ui/react";
-import TeacherCard from "../../../components/TeachersCard/TeachersCard";
+import TeachersCard from "../../../components/TeachersCard/TeachersCard";
 import useTeacherItem from "../../../hooks/useTeacherItem";
 // import { TeacherType } from "../../../types";
 
@@ -24,7 +24,7 @@ const IndexTeachers = () => {
       {responseData && responseData.data.length > 0 ? (
         <Flex direction="row" wrap="wrap" gap="4">
           {responseData.data.map((teacher) => (
-            <TeacherCard key={teacher.id} teacher={teacher} />
+            <TeachersCard key={teacher.id} teacher={teacher} />
           ))}
         </Flex>
       ) : (

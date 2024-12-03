@@ -6,7 +6,7 @@ class CollegeSchema(Schema):
     name = fields.Str(required=True)
     location = fields.Str(required=True)
     email = fields.Email(required=True)
-    phone = fields.Int(required=True)
+    phone = fields.String(required=True)
     logo = fields.Str(allow_none=True)
 
     # Nested field for associated Schemas =>

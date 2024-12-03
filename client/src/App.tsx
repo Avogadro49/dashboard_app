@@ -6,6 +6,7 @@ import TeacherForm from "./views/pages/Teacher/create";
 import IndexTeachers from "./views/pages/Teacher";
 import IndexColleges from "./views/pages/Colleges";
 import ShowTeachers from "./views/pages/Teacher/show";
+import CollegeForm from "./views/pages/Colleges/create";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="teachers/index" element={<IndexTeachers />} />
         <Route path="teachers/:id" element={<ShowTeachers />} />
         <Route path="colleges/index" element={<IndexColleges />} />
+        <Route path="colleges/create" element={<CollegeForm />} />
         {/* <Route path="colleges/show/:id" element={<IndexColleges />} /> */}
       </Route>
     </Routes>

@@ -8,3 +8,11 @@ export const teacherSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().regex(phoneRegex, "Invalid phone number format"),
 });
+
+export const collegeSchema = z.object({
+  logo: z.string().url(),
+  name: z.string().min(3, "Name is Required"),
+  location: z.string().min(5, "Location is required"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().regex(phoneRegex, "Invalid phone number format"),
+});

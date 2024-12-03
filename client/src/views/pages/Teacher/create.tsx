@@ -5,40 +5,24 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { teacherSchema } from "../../../schemas";
 import { useNavigate } from "react-router-dom";
+import { apiRequest } from "../../../utils/apiRequest";
 // import { http } from "../../../services/http";
 
 const TeacherForm = () => {
   const navigate = useNavigate();
+  
   // Type for form data derived from schema
   type TeacherFormData = z.infer<typeof teacherSchema>;
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<TeacherFormData>({
+  const {register,handleSubmit,formState: { errors },} = useForm<TeacherFormData>({
     resolver: zodResolver(teacherSchema),
   });
 
   const onSubmit = async (data: TeacherFormData) => {
+
     try {
-      const response = await fetch(
-        [import.meta.env.VITE_API_URL, "teachers/"].join("/"),
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      navigate('/teachers/index')
-
+      await apiRequest("teachers/", "POST", data);
+      navigate("/teachers/index");
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -62,11 +46,7 @@ const TeacherForm = () => {
             <Text mb={1} fontWeight="bold">
               Avatar
             </Text>
-            <Input
-              {...register("avatar")}
-              type="text"
-              placeholder="Paste Avatar URL"
-            />
+            <Input {...register("avatar")} type="text" placeholder="Paste Avatar URL" />
             <p style={{ color: "red" }}>{errors.avatar?.message}</p>
           </Box>
           {/* Name Field */}
@@ -84,11 +64,7 @@ const TeacherForm = () => {
             <Text mb={1} fontWeight="bold">
               Email
             </Text>
-            <Input
-              {...register("email")}
-              type="email"
-              placeholder="Enter email"
-            />
+            <Input {...register("email")} type="email" placeholder="Enter email" />
             <p style={{ color: "red" }}>{errors.email?.message}</p>
           </Box>
           {/* Phone Field */}
@@ -96,11 +72,7 @@ const TeacherForm = () => {
             <Text mb={1} fontWeight="bold">
               Phone
             </Text>
-            <Input
-              {...register("phone")}
-              type="text"
-              placeholder="Enter phone number"
-            />
+            <Input {...register("phone")} type="text" placeholder="Enter phone number" />
             <p style={{ color: "red" }}>{errors.phone?.message}</p>
           </Box>
         </HStack>

@@ -15,7 +15,7 @@ type TeachersCardProps = {
   teacher: TeacherType;
 };
 
-const TeacherCard: React.FC<TeachersCardProps> = ({ teacher }) => {
+const TeachersCard: React.FC<TeachersCardProps> = ({ teacher }) => {
   const navigate = useNavigate();
 
   const viewMore = () => {
@@ -69,4 +69,4 @@ const TeacherCard: React.FC<TeachersCardProps> = ({ teacher }) => {
   );
 };
 
-export default TeacherCard;
+export default TeachersCard;

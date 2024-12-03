@@ -9,7 +9,7 @@ class College(db.Model):
     name = db.Column(db.String(255), nullable=False, unique=True)
     location = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    phone = db.Column(db.BigInteger, nullable=False)
+    phone = db.Column(db.String(18), nullable=False)
     logo = db.Column(db.String(255), nullable=False)
 
 
