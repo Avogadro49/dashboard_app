@@ -5,63 +5,32 @@ import {
   AccordionItemContent,
   AccordionItemTrigger,
   AccordionRoot,
-  Icon,
+  // Icon,
   Text,
   HStack,
 } from "@chakra-ui/react";
-// import { FaRegEye, FaPlus } from "react-icons/fa";
+import { FaRegEye, FaPlus } from "react-icons/fa";
 import { NavLink } from "react-router";
 import useDetailsItem from "../../hooks/useDetailsItem";
 // import { DetailsType } from "../../types";
 
 const Sidemenu = () => {
-  const { responseData, error, isLoading } = useDetailsItem();
+  const { responseData: items, error, isLoading } = useDetailsItem();
 
   if (isLoading) {
-    return <Box>Loading...</Box>; // You can replace this with a Chakra UI spinner if needed
+    return <Box>Loading...</Box>;
   }
 
   if (error) {
     return <Box>Error loading menu items: {error.message}</Box>;
   }
 
+  if (!items) {
+    return <Box>No menu items available.</Box>;
+  }
+  console.log(items);
   return (
-    // <Box
-    //   as="aside"
-    //   w="250px"
-    //   bg="gray.700"
-    //   color="white"
-    //   p={4}
-    //   display={{ base: "none", md: "block" }}
-    // >
-    //   <AccordionRoot collapsible defaultValue={["1"]}>
-    //     {items.map((item, index) => (
-    //       <AccordionItem key={index} value={item.id} bg="none">
-    //         <AccordionItemTrigger fontSize="xl" cursor="pointer">
-    //           {item.title}
-    //         </AccordionItemTrigger>
-    //         <AccordionItemContent>
-    //           {item.links.map((link, index) => (
-    //             <NavLink
-    //               className={["router-link"].join(" ")}
-    //               key={index}
-    //               to={link.path}
-    //             >
-    //               <HStack
-    //                 justifyContent="space-between"
-    //                 alignItems="center"
-    //                 _hover={{ bg: "gray.900" }}
-    //               >
-    //                 <Text marginY={1}>{link.text}</Text>
-    //                 <Icon marginY={1}>{link.icon}</Icon>
-    //               </HStack>
-    //             </NavLink>
-    //           ))}
-    //         </AccordionItemContent>
-    //       </AccordionItem>
-    //     ))}
-    //   </AccordionRoot>
-    // </Box>
+
     <Box
       as="aside"
       w="250px"
@@ -70,11 +39,11 @@ const Sidemenu = () => {
       p={4}
       display={{ base: "none", md: "block" }}
     >
-      <AccordionRoot collapsible defaultValue={["1"]}>
-        {responseData.map((item, index) => (
-          <AccordionItem key={index} value={item.id} bg="none">
+      {/* <AccordionRoot collapsible defaultValue={["1"]}>
+        {responseData.map((item) => (
+          <AccordionItem key={item.id} value={item.id.toString()} bg="none">
             <AccordionItemTrigger fontSize="xl" cursor="pointer">
-              {item.title}
+              {item.name} ({item.total})
             </AccordionItemTrigger>
             <AccordionItemContent>
               {item.links.map((link, index) => (
@@ -85,7 +54,31 @@ const Sidemenu = () => {
                     _hover={{ bg: "gray.900" }}
                   >
                     <Text marginY={1}>{link.text}</Text>
-                    <Icon marginY={1}>{link.icon}</Icon>
+                    <Icon marginY={1} />
+                  </HStack>
+                </NavLink>
+              ))}
+            </AccordionItemContent>
+          </AccordionItem>
+        ))}
+      </AccordionRoot> */}
+      <AccordionRoot collapsible defaultValue={["1"]}>
+        {items.map((item) => (
+          <AccordionItem key={item.id} value={item.id.toString()} bg="none">
+            <AccordionItemTrigger fontSize="xl" cursor="pointer">
+              {item.name}
+            </AccordionItemTrigger>
+            <AccordionItemContent>
+              {item.links.map((link, index) => (
+                <NavLink className="router-link" key={index} to={link.path}>
+                  <HStack
+                    justifyContent="space-between"
+                    alignItems="center"
+                    _hover={{ bg: "gray.900" }}
+                  >
+                    <Text marginY={1}>{link.text}</Text>
+                    {link.text.toLowerCase() === "create" ? <FaPlus /> : null}
+                    {link.text.toLowerCase() === "view" ? <FaRegEye /> : null}
                   </HStack>
                 </NavLink>
               ))}

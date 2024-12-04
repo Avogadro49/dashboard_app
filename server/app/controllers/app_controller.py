@@ -17,6 +17,8 @@ class AppController:
     @staticmethod
     def details():
         models = [
+            
+
             {
                 "id": 1,
                 "name": "Teacher",
@@ -93,6 +95,7 @@ class AppController:
                 "total": db.session.query(Profession).count()
             },
             {
+
                 "id": 6,
                 "name": "Student",
                 "links": [
@@ -107,6 +110,8 @@ class AppController:
                     ],
                 "total": db.session.query(Student).count()
             },
+        
+        
         ]
         return jsonify(models)
        

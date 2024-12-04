@@ -62,3 +62,7 @@ export type DetailsType = {
   links: Link[];
   total: number;
 };
+
+export type DetailsResponseType = {
+  data: DetailsType[];
+};
