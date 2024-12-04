@@ -7,7 +7,7 @@ from sqlalchemy.exc import SQLAlchemyError
 class GroupService:
     @staticmethod
     def create_group(group_data):
-        try:
+        # try:
             group = Group(
                 group_number=group_data["group_number"],
                 profession_id=group_data["profession_id"],
@@ -16,9 +16,9 @@ class GroupService:
             db.session.add(group)
             db.session.commit()
             return group
-        except Exception as e:
-            db.session.rollback()
-            raise Exception(f"Error creating group: {str(e)}")
+        # except Exception as e:
+        #     db.session.rollback()
+        #     raise Exception(f"Error creating group: {str(e)}")
     
     def update_group(group_id, group_data):
         group = Group.query.get(group_id)

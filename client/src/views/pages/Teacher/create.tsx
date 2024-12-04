@@ -27,7 +27,7 @@ const TeacherForm = () => {
       console.error("Error submitting form:", error);
     }
   };
-
+  
   return (
     <Box
       //   maxW="md"

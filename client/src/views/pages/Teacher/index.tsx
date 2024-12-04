@@ -8,7 +8,7 @@ const IndexTeachers = () => {
   // const { data } = responseData as {
   //   data: TeacherType[];
   // };
-  console.log(responseData);
+  // console.log(responseData);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading teachers: {error.message}</p>;

@@ -16,3 +16,9 @@ export const collegeSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().regex(phoneRegex, "Invalid phone number format"),
 });
+
+export const groupSchema = z.object({
+  group_number: z.string().min(3, "Group number is required"),
+  college_id: z.string().min(1, "College ID is required"),
+  profession_id: z.string().min(1, "Profession ID is required"),
+});

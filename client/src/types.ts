@@ -51,6 +51,18 @@ export type ProfessionsType = {
   colleges: CollegesType[];
 };
 
+export type GroupType = {
+  id: string | number;
+  group_number: number;
+  college_id: string | number;
+  profession_id: string | number;
+};
+
+export type GroupResponse = {
+  data: GroupType[];
+  total: number;
+};
+
 export type Link = {
   text: string;
   path: string;
