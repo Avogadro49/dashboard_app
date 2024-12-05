@@ -1,4 +1,4 @@
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex, Center, Spinner } from "@chakra-ui/react";
 import TeachersCard from "../../../components/TeachersCard/TeachersCard";
 import useTeacherItem from "../../../hooks/useTeacherItem";
 // import { TeacherType } from "../../../types";
@@ -10,7 +10,13 @@ const IndexTeachers = () => {
   // };
   // console.log(responseData);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return (
+      <Center h="100vh" margin="auto">
+        <Spinner size="xl" color="blue.500" />
+      </Center>
+    );
+  }
   if (error) return <p>Error loading teachers: {error.message}</p>;
   return (
     <Box padding="4" mx="auto">

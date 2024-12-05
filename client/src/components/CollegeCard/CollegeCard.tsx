@@ -1,60 +1,92 @@
 // import React from "react"
-import { Box, Image, Text, Stack } from "@chakra-ui/react";
-// import { useNavigate } from "react-router-dom";
-import { CollegesType } from "../../types";
+
+import {
+  Badge,
+  Box,
+  Button,
+  Card,
+  HStack,
+  Image,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import { RiEditLine, RiMailLine } from "react-icons/ri";
+import { CollegeType } from "../../types";
 
 type CollegeCardProps = {
-  college: CollegesType;
+  college: CollegeType;
 };
 
 const CollegeCard: React.FC<CollegeCardProps> = ({ college }) => {
-  //   const navigate = useNavigate();
-
-  //   const viewMore = () => {
-  //     navigate(`/colleges/${college.id}`);
-  //   };
-
   return (
-    <Box
-      w="300px"
-      bg="white"
-      borderRadius="md"
-      boxShadow="lg"
+    <Card.Root
+      display="flex"
+      flexDirection={{ base: "column", md: "row" }}
       overflow="hidden"
-      _hover={{ boxShadow: "xl", transform: "scale(1.05)" }}
-      transition="all 0.3s ease"
     >
-      {/* College Logo */}
       <Image
-        src={college.logo}
         alt={college.name}
-        width="100%"
+        src={college.logo}
+        maxW="50%"
+        marginX={{ base: "0", md: "auto" }}
+        // maxH="60%"
+        marginLeft="1"
+        marginY="1"
+        borderRadius={50}
+        _hover={{ borderRadius: "0" }}
+        cursor="pointer"
+        aspectRatio={3 / 4}
         objectFit="cover"
-        aspectRatio="4/3"
+        transition="all 0.3s ease"
       />
-
-      <Stack p={4}>
-        {/* College Name */}
-        <Text fontSize="xl" fontWeight="bold" color="gray.800">
-          {college.name}
-        </Text>
-
-        {/* College Location */}
-        <Text fontSize="md" color="gray.600">
-          {college.location}
-        </Text>
-
-        {/* College Email */}
-        <Text fontSize="sm" color="blue.500">
-          {college.email}
-        </Text>
-
-        {/* College Phone */}
-        <Text fontSize="sm" color="gray.500">
-          {college.phone}
-        </Text>
-      </Stack>
-    </Box>
+      <Box w={{ base: "100%", md: "50%" }}>
+        <Card.Body>
+          <Card.Title mb="2">{college.name}</Card.Title>
+          <Card.Description>{college.email}</Card.Description>
+          <VStack mt="4" alignItems="start">
+            {college.teachers.map((teacher) => (
+              <HStack>
+                <Text textStyle="sm">Teachers:</Text>
+                <Badge size="md" colorPalette="green" key={teacher.id}>
+                  {teacher.name}
+                </Badge>
+              </HStack>
+            ))}
+            {college.professions.map((profession) => (
+              <HStack>
+                <Text textStyle="sm">Professions:</Text>
+                <Badge
+                  size="md"
+                  colorPalette="purple"
+                  padding={1}
+                  key={profession.id}
+                >
+                  {profession.name}
+                </Badge>
+              </HStack>
+            ))}
+          </VStack>
+          <HStack align="start" textStyle="sm">
+            <Text fontWeight="light">Phone:</Text>
+            <Text alignSelf="center">{college.phone}</Text>
+          </HStack>
+          <HStack align="start" textStyle="sm">
+            <Text fontWeight="light">Location:</Text>
+            <Text alignSelf="center">{college.location}</Text>
+          </HStack>
+        </Card.Body>
+        <Card.Footer>
+          <HStack justify="center" width="100%">
+            <Button width="50%" variant="solid">
+              <RiMailLine /> Contact College
+            </Button>
+            <Button width="50%">
+              <RiEditLine /> Edit College
+            </Button>
+          </HStack>
+        </Card.Footer>
+      </Box>
+    </Card.Root>
   );
 };
 

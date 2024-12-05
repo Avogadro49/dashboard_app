@@ -1,5 +1,5 @@
 import { Box, Text, Flex } from "@chakra-ui/react";
-import CollegeCard from "../../../components/CollegeCard/CollegeCard";
+import CollegesCard from "../../../components/CollegesCard/CollegesCard";
 import useCollegeItem from "../../../hooks/useCollegeItem";
 
 const IndexColleges = () => {
@@ -20,7 +20,7 @@ const IndexColleges = () => {
       {responseData && responseData.data.length > 0 ? (
         <Flex direction="row" wrap="wrap" gap="4">
           {responseData.data.map((college) => (
-            <CollegeCard key={college.id} college={college} />
+            <CollegesCard key={college.id} college={college} />
           ))}
         </Flex>
       ) : (

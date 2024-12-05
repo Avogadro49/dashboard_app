@@ -18,7 +18,11 @@ type TeacherCardProps = {
 
 const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
   return (
-    <Card.Root flexDirection="row" overflow="hidden">
+    <Card.Root
+      display="flex"
+      flexDirection={{ base: "column", md: "row" }}
+      overflow="hidden"
+    >
       <Image
         alt={teacher.name}
         src={teacher.avatar}
@@ -33,7 +37,7 @@ const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
         objectFit="cover"
         transition="all 0.3s ease"
       />
-      <Box>
+      <Box w={{ base: "100%", md: "50%" }}>
         <Card.Body>
           <Card.Title mb="2">{teacher.name}</Card.Title>
           <Card.Description>{teacher.email}</Card.Description>
@@ -66,11 +70,15 @@ const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
           </HStack>
         </Card.Body>
         <Card.Footer>
-          <HStack justify="center">
-            <Button colorPalette="teal" variant="solid">
+          <HStack
+            justify="center"
+            width="100%"
+            flexDirection={{ base: "column", md: "row" }}
+          >
+            <Button width={{ base: "100%", md: "50%" }}>
               <RiMailLine /> Contact Teacher
             </Button>
-            <Button width="50%">
+            <Button width={{ base: "100%", md: "50%" }}>
               <RiEditLine /> Edit Teacher
             </Button>
           </HStack>

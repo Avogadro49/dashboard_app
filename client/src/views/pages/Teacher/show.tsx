@@ -1,8 +1,8 @@
 // import React from "react"
+import { useEffect, useState } from "react";
 import { Box, Container, Spinner, VStack } from "@chakra-ui/react";
 import { useParams } from "react-router";
 import { TeacherType } from "../../../types";
-import { useEffect, useState } from "react";
 import TeacherCard from "../../../components/TeacherCard/TeacherCard";
 
 const ShowTeachers = () => {

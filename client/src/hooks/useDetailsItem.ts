@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { DetailsType } from "../types";
+import { DetailType } from "../types";
 
 const useDetailsItem = () => {
-  const [responseData, setResponseData] = useState<DetailsType[]>([]);
+  const [responseData, setResponseData] = useState<DetailType[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const url = [import.meta.env.VITE_API_URL, "details"].join("/");
@@ -15,7 +15,7 @@ const useDetailsItem = () => {
         if (!response.ok) {
           throw new Error("Network error");
         }
-        const data: DetailsType[] = await response.json();
+        const data: DetailType[] = await response.json();
         setResponseData(data);
         setError(null); // Clear previous errors
       } catch (err) {

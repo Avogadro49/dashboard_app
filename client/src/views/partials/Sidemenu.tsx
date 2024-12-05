@@ -8,6 +8,8 @@ import {
   // Icon,
   Text,
   HStack,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { FaRegEye, FaPlus } from "react-icons/fa";
 import { NavLink } from "react-router";
@@ -18,7 +20,21 @@ const Sidemenu = () => {
   const { responseData: items, error, isLoading } = useDetailsItem();
 
   if (isLoading) {
-    return <Box>Loading...</Box>;
+    return (
+      <Box
+        as="aside"
+        w="250px"
+        h="100vh"
+        bg="gray.700"
+        color="white"
+        p={4}
+        display={{ base: "none", md: "block" }}
+      >
+        <Center h="full">
+          <Spinner size="xl" color="blue.500" />
+        </Center>
+      </Box>
+    );
   }
 
   if (error) {
@@ -30,7 +46,6 @@ const Sidemenu = () => {
   }
   console.log(items);
   return (
-
     <Box
       as="aside"
       w="250px"
@@ -39,29 +54,6 @@ const Sidemenu = () => {
       p={4}
       display={{ base: "none", md: "block" }}
     >
-      {/* <AccordionRoot collapsible defaultValue={["1"]}>
-        {responseData.map((item) => (
-          <AccordionItem key={item.id} value={item.id.toString()} bg="none">
-            <AccordionItemTrigger fontSize="xl" cursor="pointer">
-              {item.name} ({item.total})
-            </AccordionItemTrigger>
-            <AccordionItemContent>
-              {item.links.map((link, index) => (
-                <NavLink className="router-link" key={index} to={link.path}>
-                  <HStack
-                    justifyContent="space-between"
-                    alignItems="center"
-                    _hover={{ bg: "gray.900" }}
-                  >
-                    <Text marginY={1}>{link.text}</Text>
-                    <Icon marginY={1} />
-                  </HStack>
-                </NavLink>
-              ))}
-            </AccordionItemContent>
-          </AccordionItem>
-        ))}
-      </AccordionRoot> */}
       <AccordionRoot collapsible defaultValue={["1"]}>
         {items.map((item) => (
           <AccordionItem key={item.id} value={item.id.toString()} bg="none">

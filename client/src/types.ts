@@ -4,8 +4,8 @@ export type TeacherType = {
   email: string;
   phone: string;
   avatar: string;
-  colleges: CollegesType[];
-  modules: ModulesType[];
+  colleges: CollegeType[];
+  modules: ModuleType[];
 };
 
 export type TeacherResponse = {
@@ -17,7 +17,7 @@ export type TeachersResponse = {
   total: number;
 };
 
-export type CollegesType = {
+export type CollegeType = {
   id: number | string;
   name: string;
   email: string;
@@ -25,15 +25,15 @@ export type CollegesType = {
   logo: string;
   phone: string;
   teachers: TeacherType[];
-  professions: ProfessionsType[];
+  professions: ProfessionType[];
 };
 
 export type CollegeResponse = {
-  data: CollegesType[];
+  data: CollegeType[];
   total: number;
 };
 
-export type ModulesType = {
+export type ModuleType = {
   id: number | string;
   name: string;
   requirements: string;
@@ -42,13 +42,13 @@ export type ModulesType = {
   professions: [];
 };
 
-export type ProfessionsType = {
+export type ProfessionType = {
   id: string | number;
   name: string;
   description: string;
   code: number;
-  modules: ModulesType[];
-  colleges: CollegesType[];
+  modules: ModuleType[];
+  colleges: CollegeType[];
 };
 
 export type GroupType = {
@@ -68,7 +68,7 @@ export type Link = {
   path: string;
 };
 
-export type DetailsType = {
+export type DetailType = {
   id: string;
   name: string;
   links: Link[];
@@ -76,5 +76,5 @@ export type DetailsType = {
 };
 
 export type DetailsResponseType = {
-  data: DetailsType[];
+  data: DetailType[];
 };
