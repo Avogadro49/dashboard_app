@@ -34,12 +34,17 @@ export type CollegeResponse = {
 };
 
 export type ModuleType = {
-  id: number | string;
+  id: string;
   name: string;
   requirements: string;
   code: number;
   teachers: TeacherType[];
-  professions: [];
+  professions: ProfessionType[];
+};
+
+export type ModuleRespone = {
+  data: ModuleType[];
+  total: number;
 };
 
 export type ProfessionType = {

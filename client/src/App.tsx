@@ -10,6 +10,8 @@ import CollegeForm from "./views/pages/Colleges/create";
 import IndexGroups from "./views/pages/Groups";
 import GroupForm from "./views/pages/Groups/create";
 import ShowColleges from "./views/pages/Colleges/show";
+import IndexModules from "./views/pages/Modules";
+import ModuleForm from "./views/pages/Modules/create";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path="colleges/:id" element={<ShowColleges />} />
         <Route path="groups/index" element={<IndexGroups />} />
         <Route path="groups/create" element={<GroupForm />} />
+        <Route path="modules/index" element={<IndexModules />} />
+        <Route path="modules/create" element={<ModuleForm />} />
       </Route>
     </Routes>
   );

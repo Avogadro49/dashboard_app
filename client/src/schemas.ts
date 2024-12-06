@@ -22,3 +22,9 @@ export const groupSchema = z.object({
   college_id: z.string().min(1, "College ID is required"),
   profession_id: z.string().min(1, "Profession ID is required"),
 });
+
+export const moduleSchema = z.object({
+  code: z.string().min(3, "Codeis required"),
+  name: z.string().min(3, "Name is required"),
+  requirements: z.string().min(3, "requirements	 is required"),
+});
