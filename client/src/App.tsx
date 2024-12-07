@@ -12,6 +12,8 @@ import GroupForm from "./views/pages/Groups/create";
 import ShowColleges from "./views/pages/Colleges/show";
 import IndexModules from "./views/pages/Modules";
 import ModuleForm from "./views/pages/Modules/create";
+import IndexProfessions from "./views/pages/Professions";
+import ProfessionForm from "./views/pages/Professions/create";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="groups/create" element={<GroupForm />} />
         <Route path="modules/index" element={<IndexModules />} />
         <Route path="modules/create" element={<ModuleForm />} />
+        <Route path="professions/index" element={<IndexProfessions />} />
+        <Route path="professions/create" element={<ProfessionForm />} />
       </Route>
     </Routes>
   );

@@ -44,7 +44,7 @@ class TeacherController:
             teacher_schema = TeacherSchema()
             return teacher_schema.dump(teacher)
         except SQLAlchemyError as e:
-            return ErrorHandler.sqlalchemy_error()
+            return ErrorHandler.sqlalchemy_error(e)
         except Exception as e:
             return ErrorHandler.generic_error(e)
 

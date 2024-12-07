@@ -56,6 +56,11 @@ export type ProfessionType = {
   colleges: CollegeType[];
 };
 
+export type ProfessionResponse = {
+  data: ProfessionType[];
+  total: number;
+};
+
 export type GroupType = {
   id: string | number;
   group_number: number;
