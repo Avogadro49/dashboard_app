@@ -64,7 +64,6 @@ const ProfessionForm = () => {
           </Box>
         </HStack>
         <HStack spaceX={4}>
-          {/* Email Field */}
           <Box width="100%">
             <Text mb={1} fontWeight="bold">
               Description
@@ -72,7 +71,7 @@ const ProfessionForm = () => {
             <Input
               {...register("description")}
               type="email"
-              placeholder="Enter email"
+              placeholder="Enter description"
             />
             <p style={{ color: "red" }}>{errors.description?.message}</p>
           </Box>

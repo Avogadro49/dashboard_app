@@ -12,7 +12,7 @@ import {
 const IndexGroups = () => {
   const { responseData, error, isLoading } = useGroupItem();
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading teachers: {error.message}</p>;
+  if (error) return <p>Error loading groups: {error.message}</p>;
   if (!responseData) return <p>No data</p>;
   return (
     <Box p={4} display="flex" marginY="auto">

@@ -33,7 +33,7 @@ class GroupController:
             groups_schema = GroupSchema(many=True)
             return jsonify({ "data": groups_schema.dump(groups), "total": len(groups)})
         except SQLAlchemyError as e:
-            return ErrorHandler.sqlalchemy_error()
+            return ErrorHandler.sqlalchemy_error(e)
         
 
     @staticmethod

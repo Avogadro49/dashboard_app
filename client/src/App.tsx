@@ -14,6 +14,7 @@ import IndexModules from "./views/pages/Modules";
 import ModuleForm from "./views/pages/Modules/create";
 import IndexProfessions from "./views/pages/Professions";
 import ProfessionForm from "./views/pages/Professions/create";
+import IndexStudents from "./views/pages/Students";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="modules/create" element={<ModuleForm />} />
         <Route path="professions/index" element={<IndexProfessions />} />
         <Route path="professions/create" element={<ProfessionForm />} />
+        <Route path="students/index" element={<IndexStudents />} />
       </Route>
     </Routes>
   );

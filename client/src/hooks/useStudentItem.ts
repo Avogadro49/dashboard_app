@@ -7,7 +7,7 @@ const useStudentItem = () => {
   );
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const url = [import.meta.env.VITE_API_URL, "teachers"].join("/");
+  const url = [import.meta.env.VITE_API_URL, "students"].join("/");
 
   useEffect(() => {
     let isMounted = true; // Flag to prevent state updates on unmounted component

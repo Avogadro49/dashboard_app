@@ -1,7 +1,7 @@
 // import React from "react"
 import {
   Box,
-  Image,
+  // Image,
   Text,
   VStack,
   Flex,
@@ -11,11 +11,11 @@ import {
 import { useNavigate } from "react-router-dom";
 import { StudentType } from "../../types";
 
-type TeachersCardProps = {
-    student: StudentType;
+type StudentsCardProps = {
+  student: StudentType;
 };
 
-const StudentsCard: React.FC<TeachersCardProps> = ({ student }) => {
+const StudentsCard: React.FC<StudentsCardProps> = ({ student }) => {
   const navigate = useNavigate();
 
   const viewMore = () => {
@@ -36,25 +36,25 @@ const StudentsCard: React.FC<TeachersCardProps> = ({ student }) => {
       transition="all 0.3s ease"
     >
       <Flex direction="column" align="center" justify="center">
-        <Image
-          src={teacher.avatar}
-          alt={teacher.email}
+        {/* <Image
+          src={student.avatar}
+          alt={student.email}
           borderRadius="full"
           boxSize="100px"
           objectFit="cover"
           marginBottom="4"
-        />
+        /> */}
         <VStack spaceX={2}>
           <Text fontWeight="bold" fontSize="lg">
-            {teacher.name}
+            {student.name}
           </Text>
           <Text fontWeight="bold" fontSize="lg">
-            {teacher.email}
+            {student.email}
           </Text>
           <Text fontWeight="bold" fontSize="lg">
-            {teacher.phone}
+            {student.phone}
           </Text>
-          <Text color="gray.500">ID: {teacher.id}</Text>
+          <Text color="gray.500">ID: {student.id}</Text>
           <HStack width="100%">
             <Button width="50%" onClick={viewMore}>
               View More
