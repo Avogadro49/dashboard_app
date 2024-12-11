@@ -44,7 +44,6 @@ const Sidemenu = () => {
   if (!items) {
     return <Box>No menu items available.</Box>;
   }
-  console.log(items);
   return (
     <Box
       as="aside"

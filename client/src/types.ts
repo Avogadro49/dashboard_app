@@ -47,7 +47,6 @@ export type StudentType = {
   name: string;
   email: string;
   phone: string;
-  //issue here? =>
   group_id: number;
   groups: GroupType[];
 };

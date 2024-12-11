@@ -15,6 +15,8 @@ import ModuleForm from "./views/pages/Modules/create";
 import IndexProfessions from "./views/pages/Professions";
 import ProfessionForm from "./views/pages/Professions/create";
 import IndexStudents from "./views/pages/Students";
+import StudentForm from "./views/pages/Students/create";
+import ShowStudents from "./views/pages/Students/show";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
         <Route path="professions/index" element={<IndexProfessions />} />
         <Route path="professions/create" element={<ProfessionForm />} />
         <Route path="students/index" element={<IndexStudents />} />
+        <Route path="students/create" element={<StudentForm />} />
+        <Route path="students/:id" element={<ShowStudents />} />
       </Route>
     </Routes>
   );

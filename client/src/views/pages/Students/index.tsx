@@ -21,8 +21,8 @@ const IndexStudents = () => {
         Students
       </Text>
       <img
-        src="https://res.cloudinary.com/dcu4dwbcu/image/upload/v1732886372/cooltext470876669822471_xvxhmm.gif"
-        alt=""
+        src="https://res.cloudinary.com/dcu4dwbcu/image/upload/v1733846484/cooltext471549793007777_unpy9h.gif"
+        alt="Students blaming text"
       />
       {responseData && responseData.data.length > 0 ? (
         <Flex direction="row" wrap="wrap" gap="4">

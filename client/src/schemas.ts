@@ -34,3 +34,10 @@ export const professionSchema = z.object({
   name: z.string().min(3, "Name is required"),
   description: z.string().min(3, "Description is required"),
 });
+
+export const studentsSchema = z.object({
+  name: z.string().min(3, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().regex(phoneRegex, "Invalid phone number format"),
+  group_id: z.string().min(1),
+});
