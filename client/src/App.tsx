@@ -18,6 +18,7 @@ import ProfessionForm from "./views/pages/Professions/create";
 import IndexStudents from "./views/pages/Students";
 import StudentForm from "./views/pages/Students/create";
 import ShowStudents from "./views/pages/Students/show";
+import ShowModule from "./views/pages/Modules/show";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="groups/index" element={<IndexGroups />} />
         <Route path="groups/create" element={<GroupForm />} />
         <Route path="modules/index" element={<IndexModules />} />
+        <Route path="modules/:id" element={<ShowModule />} />
         <Route path="modules/create" element={<ModuleForm />} />
         <Route path="professions/index" element={<IndexProfessions />} />
         <Route path="professions/create" element={<ProfessionForm />} />
