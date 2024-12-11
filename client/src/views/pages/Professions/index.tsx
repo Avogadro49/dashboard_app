@@ -1,6 +1,6 @@
 import useProfessionItem from "../../../hooks/useProfession";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import ProfessionCard from "../../../components/ProfessionCard/ProfessionCard";
+import ProfessionsCard from "../../../components/ProfessionsCard/ProfessionsCard";
 
 const IndexProfessions = () => {
   const { responseData, error, isLoading } = useProfessionItem();
@@ -15,7 +15,7 @@ const IndexProfessions = () => {
       {responseData && responseData.data.length > 0 ? (
         <Flex direction="row" wrap="wrap" gap="4">
           {responseData.data.map((profession) => (
-            <ProfessionCard key={profession.id} profession={profession} />
+            <ProfessionsCard key={profession.id} profession={profession} />
           ))}
         </Flex>
       ) : (

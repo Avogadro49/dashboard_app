@@ -48,11 +48,7 @@ const ProfessionForm = () => {
             <Text mb={1} fontWeight="bold">
               Code
             </Text>
-            <Input
-              {...register("code")}
-              type="text"
-              placeholder="Paste Avatar URL"
-            />
+            <Input {...register("code")} type="text" placeholder="Enter code" />
             <p style={{ color: "red" }}>{errors.code?.message}</p>
           </Box>
           <Box width="100%">
