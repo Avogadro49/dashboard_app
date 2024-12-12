@@ -1,10 +1,12 @@
 // import React from "react";
 import { Box, Center, Flex, Spinner, Text } from "@chakra-ui/react";
-import useModuleItem from "../../../hooks/useModulesItem";
+import useData from "../../../hooks/useData";
+import { ModuleType } from "../../../types";
 import ModulesCard from "../../../components/ModulesCard/ModulesCard";
 
 const IndexModules = () => {
-  const { responseData, error, isLoading, deleteModule } = useModuleItem();
+  const { responseData, error, isLoading, deleteItem } =
+    useData<ModuleType>("modules");
 
   if (isLoading) {
     return (
@@ -17,7 +19,7 @@ const IndexModules = () => {
   if (error) return <p>Error loading modules: {error.message}</p>;
 
   const handleDelete = (id: string) => {
-    deleteModule(id);
+    deleteItem(id);
   };
 
   return (

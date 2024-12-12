@@ -1,14 +1,17 @@
 import GroupsCard from "../../../components/GroupsCard/GroupsCard";
-import useGroupItem from "../../../hooks/useGrouopItems";
 import { Box, Flex, Text } from "@chakra-ui/react";
+// import useGroupItem from "../../../hooks/useGrouopItems";
+import useData from "../../../hooks/useData";
+import { GroupType } from "../../../types";
 
 const IndexGroups = () => {
-  const { responseData, error, isLoading, deleteGroup } = useGroupItem();
+  const { responseData, error, isLoading, deleteItem } =
+    useData<GroupType>("groups");
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading groups: {error.message}</p>;
   if (!responseData) return <p>No data</p>;
   const handleDelete = (id: string) => {
-    deleteGroup(id);
+    deleteItem(id);
   };
   return (
     <Box

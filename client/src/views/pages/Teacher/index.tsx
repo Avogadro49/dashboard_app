@@ -1,15 +1,11 @@
 import { Box, Text, Flex, Center, Spinner } from "@chakra-ui/react";
 import TeachersCard from "../../../components/TeachersCard/TeachersCard";
-import useTeacherItem from "../../../hooks/useTeacherItem";
-// import { TeacherType } from "../../../types";
+import useData from "../../../hooks/useData";
+import { TeacherType } from "../../../types";
 
 const IndexTeachers = () => {
-  const { responseData, error, isLoading, deleteTeacher } = useTeacherItem();
-  // const { data } = responseData as {
-  //   data: TeacherType[];
-  // };
-  // console.log(responseData);
-
+  const { responseData, error, isLoading, deleteItem } =
+    useData<TeacherType>("teachers");
   if (isLoading) {
     return (
       <Center h="100vh" margin="auto">
@@ -21,7 +17,7 @@ const IndexTeachers = () => {
   if (error) return <p>Error loading teachers: {error.message}</p>;
 
   const handleDelete = (id: string) => {
-    deleteTeacher(id);
+    deleteItem(id);
   };
   return (
     <Box padding="4" mx="auto">

@@ -1,10 +1,12 @@
 // import React from "react"
 import { Box, Center, Flex, Spinner, Text } from "@chakra-ui/react";
-import useStudentItem from "../../../hooks/useStudentItem";
 import StudentsCard from "../../../components/StudentsCard/StudentsCard";
+import useData from "../../../hooks/useData";
+import { StudentType } from "../../../types";
 
 const IndexStudents = () => {
-  const { responseData, error, isLoading, deleteStudent } = useStudentItem();
+  const { responseData, error, isLoading, deleteItem } =
+    useData<StudentType>("students");
 
   if (isLoading) {
     return (
@@ -16,7 +18,7 @@ const IndexStudents = () => {
   if (error) return <p>Error loading student: {error.message}</p>;
 
   const handleDelete = (id: string) => {
-    deleteStudent(id);
+    deleteItem(id);
   };
   return (
     <Box padding="4" mx="auto">

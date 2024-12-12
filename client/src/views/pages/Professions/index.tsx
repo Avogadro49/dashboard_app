@@ -1,15 +1,16 @@
-import useProfessionItem from "../../../hooks/useProfession";
 import { Box, Flex, Text } from "@chakra-ui/react";
+import useData from "../../../hooks/useData";
 import ProfessionsCard from "../../../components/ProfessionsCard/ProfessionsCard";
+import { ProfessionType } from "../../../types";
 
 const IndexProfessions = () => {
-  const { responseData, error, isLoading, deleteProfession } =
-    useProfessionItem();
+  const { responseData, error, isLoading, deleteItem } =
+    useData<ProfessionType>("professions");
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading college: {error.message}</p>;
 
   const handleDelete = (id: string) => {
-    deleteProfession(id);
+    deleteItem(id);
   };
   return (
     <Box padding="4" mx="auto">

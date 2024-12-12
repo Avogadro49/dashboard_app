@@ -1,15 +1,16 @@
 import { Box, Text, Flex } from "@chakra-ui/react";
 import CollegesCard from "../../../components/CollegesCard/CollegesCard";
-import useCollegeItem from "../../../hooks/useCollegeItem";
+import useData from "../../../hooks/useData";
+import { CollegeType } from "../../../types";
 
 const IndexColleges = () => {
-  const { responseData, error, isLoading, deleteCollege } = useCollegeItem();
+  const { responseData, error, isLoading, deleteItem } = useData<CollegeType>('colleges');
   console.log(responseData);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading college: {error.message}</p>;
   const handleDelete = (id: string) => {
-    deleteCollege(id);
+    deleteItem(id);
   };
   return (
     <Box padding="4" mx="auto">

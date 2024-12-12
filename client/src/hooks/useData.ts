@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { StudentResponse } from "../types";
 
-const useStudentItem = () => {
-  const [responseData, setResponseData] = useState<StudentResponse | null>(
-    null
-  );
+interface ApiResponse<T> {
+  data: T[];
+  total: number;
+}
+
+const useData = <T>(endpoint: string) => {
+  const [responseData, setResponseData] = useState<ApiResponse<T> | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const url = [import.meta.env.VITE_API_URL, "students"].join("/");
+  const url = [import.meta.env.VITE_API_URL, endpoint].join("/");
 
   useEffect(() => {
-    let isMounted = true; // Flag to prevent state updates on unmounted component
+    let isMounted = true;
     const controller = new AbortController();
     const signal = controller.signal;
 
@@ -19,19 +21,17 @@ const useStudentItem = () => {
       try {
         const response = await fetch(url, { signal });
         if (!response.ok) {
-          throw new Error("Network error originated");
+          throw new Error(`Failed to fetch data from ${endpoint}`);
         }
-        const data: StudentResponse = await response.json(); // Type the response as TeachersResponse
+        const data: ApiResponse<T> = await response.json();
         if (isMounted) {
           setResponseData(data);
           setError(null);
         }
       } catch (err) {
-        if (signal.aborted) {
-          console.log("Fetch Aborted");
-        } else if (isMounted) {
-          setResponseData(null);
+        if (!signal.aborted) {
           setError(err instanceof Error ? err : new Error("Unknown error"));
+          setResponseData(null);
         }
       } finally {
         if (isMounted) {
@@ -48,14 +48,11 @@ const useStudentItem = () => {
     };
   }, [url]);
 
-  const deleteStudent = async (id: string) => {
+  const deleteItem = async (id: string) => {
     try {
-      const response = await fetch(`${url}/${id}`, {
-        method: "DELETE",
-      });
-
+      const response = await fetch(`${url}/${id}`, { method: "DELETE" });
       if (!response.ok) {
-        throw new Error("Failed to delete module");
+        throw new Error(`Failed to delete item with id ${id}`);
       }
 
       // Update state after deletion
@@ -63,7 +60,7 @@ const useStudentItem = () => {
         prev
           ? {
               ...prev,
-              data: prev.data.filter((module) => module.id !== id),
+              data: prev.data.filter((item) => (item as any).id !== id),
               total: prev.total - 1,
             }
           : null
@@ -73,7 +70,7 @@ const useStudentItem = () => {
     }
   };
 
-  return { responseData, error, isLoading, deleteStudent };
+  return { responseData, error, isLoading, deleteItem };
 };
 
-export default useStudentItem;
+export default useData;
