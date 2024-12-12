@@ -4,8 +4,8 @@ import useData from "../../../hooks/useData";
 import { CollegeType } from "../../../types";
 
 const IndexColleges = () => {
-  const { responseData, error, isLoading, deleteItem } = useData<CollegeType>('colleges');
-  console.log(responseData);
+  const { responseData, error, isLoading, deleteItem } =
+    useData<CollegeType>("colleges");
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading college: {error.message}</p>;

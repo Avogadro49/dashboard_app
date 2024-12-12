@@ -32,6 +32,20 @@ class AppController:
                             "path": "teachers/index",
                         },
                     ],
+                "monthlyData": [
+                    { "month": "Jan", "count": 4 },
+                    { "month": "Feb", "count": 5 },
+                    { "month": "Mar", "count": 6 },
+                    { "month": "Apr", "count": 12 },
+                    { "month": "May", "count": 25 },
+                    { "month": "Jun", "count": 45 },
+                    { "month": "Jul", "count": 54 },
+                    { "month": "Aug", "count": 40 },
+                    { "month": "Sep", "count": 41 },
+                    { "month": "Oct", "count": 45 },
+                    { "month": "Nov", "count": 43 },
+                    { "month": "Dec", "count": 33 },
+                ],
                 "total": db.session.query(Teacher).count()
             },
             {

@@ -92,10 +92,16 @@ export type Link = {
   path: string;
 };
 
+export type monthlyData = {
+  count: number;
+  month: string;
+};
+
 export type DetailType = {
   id: string;
   name: string;
   links: Link[];
+  monthlyData: monthlyData[];
   total: number;
 };
 

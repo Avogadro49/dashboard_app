@@ -17,10 +17,10 @@ const useDetailsItem = () => {
         }
         const data: DetailType[] = await response.json();
         setResponseData(data);
-        setError(null); // Clear previous errors
+        setError(null);
       } catch (err) {
         setError(err instanceof Error ? err : new Error("Unknown error"));
-        setResponseData([]); // Clear previous data in case of error
+        setResponseData([]);
       } finally {
         setIsLoading(false);
       }
