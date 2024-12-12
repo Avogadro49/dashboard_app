@@ -13,13 +13,24 @@ import { TeacherType } from "../../types";
 
 type TeachersCardProps = {
   teacher: TeacherType;
+  onDelete: (id: string) => void;
 };
 
-const TeachersCard: React.FC<TeachersCardProps> = ({ teacher }) => {
+const TeachersCard: React.FC<TeachersCardProps> = ({ teacher, onDelete }) => {
   const navigate = useNavigate();
 
   const viewMore = () => {
     navigate(`/teachers/${teacher.id}`);
+  };
+
+  // needs extract
+  const handleDelete = () => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${teacher.name}?`
+    );
+    if (confirmed) {
+      onDelete(teacher.id);
+    }
   };
 
   return (
@@ -59,7 +70,7 @@ const TeachersCard: React.FC<TeachersCardProps> = ({ teacher }) => {
             <Button width="50%" onClick={viewMore}>
               View More
             </Button>
-            <Button width="50%" color="red">
+            <Button width="50%" color="red" onClick={handleDelete}>
               Delete
             </Button>
           </HStack>

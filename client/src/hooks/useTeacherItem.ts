@@ -1,54 +1,4 @@
 import { useEffect, useState } from "react";
-
-// import { TeacherType } from "../types";
-
-// const useTeacherItem = () => {
-//   const [teachers, setTeachers] = useState<TeacherType[]>([]);
-//   const [error, setError] = useState<Error | null>(null);
-//   const [isLoading, setIsLoading] = useState<boolean>(true);
-//   const url = [import.meta.env.VITE_API_URL, "teachers"].join("/");
-//   console.log(url);
-//   useEffect(() => {
-//     const controller = new AbortController();
-//     const signal = controller.signal;
-
-//     const fetchData = async () => {
-//       setIsLoading(true);
-
-//       try {
-//         const response = await fetch(
-//           [import.meta.env.VITE_API_URL, "teachers"].join("/"),
-//           { signal }
-//         );
-//         if (!response.ok) {
-//           throw new Error("Network error originated");
-//         }
-//         const data = await response.json();
-//         setTeachers(data);
-//         setError(null);
-//       } catch (err) {
-//         if (signal.aborted) {
-//           console.log("Fetch Aborted");
-//         } else {
-//           setTeachers([]);
-//           setError(err as Error);
-//         }
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     };
-
-//     fetchData();
-
-//     return () => {
-//       controller.abort();
-//     };
-//   }, []);
-//   return { teachers, error, isLoading };
-// };
-
-// export default useTeacherItem;
-
 import { TeachersResponse } from "../types";
 
 const useTeacherItem = () => {
@@ -98,7 +48,31 @@ const useTeacherItem = () => {
     };
   }, [url]);
 
-  return { responseData, error, isLoading };
+  const deleteTeacher = async (id: string) => {
+    try {
+      const response = await fetch(`${url}/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete module");
+      }
+
+      // Update state after deletion
+      setResponseData((prev) =>
+        prev
+          ? {
+              ...prev,
+              data: prev.data.filter((module) => module.id !== id),
+              total: prev.total - 1,
+            }
+          : null
+      );
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error("Unknown error"));
+    }
+  };
+  return { responseData, error, isLoading, deleteTeacher };
 };
 
 export default useTeacherItem;

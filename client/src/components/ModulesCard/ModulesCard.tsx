@@ -15,45 +15,16 @@ const ModulesCard: React.FC<ModuleCardType> = ({ module, onDelete }) => {
   const viewMore = () => {
     navigate(`/modules/${module.id}`);
   };
-  //   const deleteModule = async () => {
-  //     const confirmed = window.confirm(
-  //       `Are you sure you want to delete ${module.name}?`
-  //     );
-  //     if (!confirmed) return;
 
-  //     try {
-  //       const response = await fetch(
-  //         `${import.meta.env.VITE_API_URL}/modules/${module.id}`,
-  //         {
-  //           method: "DELETE",
-  //         }
-  //       );
-
-  //       if (!response.ok) {
-  //         throw new Error("Failed to delete the module.");
-  //       }
-
-  //       toast({
-  //         title: "Module deleted.",
-  //         description: `The module "${module.name}" was successfully deleted.`,
-  //         status: "success",
-  //         duration: 3000,
-  //         isClosable: true,
-  //       });
-
-  //       onDelete(module.id);
-  //     } catch (error) {
-  //       toast({
-  //         title: "Error deleting module.",
-  //         description:
-  //           error instanceof Error ? error.message : "An unknown error occurred.",
-  //         status: "error",
-  //         duration: 3000,
-  //         isClosable: true,
-  //       });
-  //     }
-  //   };
-
+  // needs extract
+  const handleDelete = () => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${module.name}?`
+    );
+    if (confirmed) {
+      onDelete(module.id);
+    }
+  };
   return (
     <Box
       w="300px"
@@ -93,7 +64,7 @@ const ModulesCard: React.FC<ModuleCardType> = ({ module, onDelete }) => {
         <Button w="50%" onClick={viewMore}>
           View More
         </Button>
-        <Button w="50%" color="red" onClick={() => onDelete(module.id)}>
+        <Button w="50%" color="red" onClick={handleDelete}>
           Delete
         </Button>
       </HStack>

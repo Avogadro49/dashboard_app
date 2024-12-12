@@ -5,15 +5,24 @@ import { CollegeType } from "../../types";
 
 type CollegeCardProps = {
   college: CollegeType;
+  onDelete: (id: string) => void;
 };
 
-const CollegesCard: React.FC<CollegeCardProps> = ({ college }) => {
+const CollegesCard: React.FC<CollegeCardProps> = ({ college, onDelete }) => {
   const navigate = useNavigate();
 
   const viewMore = () => {
     navigate(`/colleges/${college.id}`);
   };
 
+  const handleDelete = () => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${college.name}?`
+    );
+    if (confirmed) {
+      onDelete(college.id);
+    }
+  };
   return (
     <Box
       w="300px"
@@ -58,7 +67,7 @@ const CollegesCard: React.FC<CollegeCardProps> = ({ college }) => {
         <Button w="50%" onClick={viewMore}>
           View More
         </Button>
-        <Button w="50%" color="red">
+        <Button w="50%" color="red" onClick={handleDelete}>
           Delete
         </Button>
       </HStack>

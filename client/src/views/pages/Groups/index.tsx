@@ -1,52 +1,35 @@
+import GroupsCard from "../../../components/GroupsCard/GroupsCard";
 import useGroupItem from "../../../hooks/useGrouopItems";
-import {
-  Box,
-  CardBody,
-  CardHeader,
-  CardRoot,
-  HStack,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 const IndexGroups = () => {
-  const { responseData, error, isLoading } = useGroupItem();
+  const { responseData, error, isLoading, deleteGroup } = useGroupItem();
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading groups: {error.message}</p>;
   if (!responseData) return <p>No data</p>;
+  const handleDelete = (id: string) => {
+    deleteGroup(id);
+  };
   return (
-    <Box p={4} display="flex" marginY="auto">
-      {responseData.data.map((group) => (
-        <CardRoot
-          key={group.id}
-          marginX={4}
-          borderWidth={1}
-          borderRadius="lg"
-          boxShadow="lg"
-        >
-          <CardHeader>
-            <Text fontSize="xl" fontWeight="bold">
-              Group {group.group_number}
-            </Text>
-          </CardHeader>
-          <CardBody>
-            <Stack paddingX={4}>
-              <HStack>
-                <Text fontWeight="medium">Group Number:</Text>
-                <Text>{group.group_number}</Text>
-              </HStack>
-              <HStack>
-                <Text fontWeight="medium">College ID:</Text>
-                <Text>{group.college_id}</Text>
-              </HStack>
-              <HStack>
-                <Text fontWeight="medium">Profession ID:</Text>
-                <Text>{group.profession_id}</Text>
-              </HStack>
-            </Stack>
-          </CardBody>
-        </CardRoot>
-      ))}
+    <Box
+      p={4}
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+    >
+      {responseData && responseData.data.length > 0 ? (
+        <Flex direction="row" wrap="wrap" gap="4" width="100%">
+          {responseData.data.map((group) => (
+            <GroupsCard key={group.id} group={group} onDelete={handleDelete} />
+          ))}
+        </Flex>
+      ) : (
+        <Text color="gray.500" fontSize="lg" textAlign="center" mt={4}>
+          No groups available.
+        </Text>
+      )}
+      <Text marginTop={2}>Total Groups: {responseData?.total}</Text>
     </Box>
   );
 };

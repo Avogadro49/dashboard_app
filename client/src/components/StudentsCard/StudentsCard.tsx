@@ -13,13 +13,23 @@ import { StudentType } from "../../types";
 
 type StudentsCardProps = {
   student: StudentType;
+  onDelete: (id: string) => void;
 };
 
-const StudentsCard: React.FC<StudentsCardProps> = ({ student }) => {
+const StudentsCard: React.FC<StudentsCardProps> = ({ student, onDelete }) => {
   const navigate = useNavigate();
 
   const viewMore = () => {
     navigate(`/students/${student.id}`);
+  };
+
+  const handleDelete = () => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${student.name}?`
+    );
+    if (confirmed) {
+      onDelete(student.id);
+    }
   };
 
   return (
@@ -59,7 +69,7 @@ const StudentsCard: React.FC<StudentsCardProps> = ({ student }) => {
             <Button width="50%" onClick={viewMore}>
               View More
             </Button>
-            <Button width="50%" color="red">
+            <Button width="50%" color="red" onClick={handleDelete}>
               Delete
             </Button>
           </HStack>

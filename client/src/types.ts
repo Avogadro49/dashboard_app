@@ -1,5 +1,5 @@
 export type TeacherType = {
-  id: number | string;
+  id: string;
   name: string;
   email: string;
   phone: string;
@@ -18,7 +18,7 @@ export type TeachersResponse = {
 };
 
 export type CollegeType = {
-  id: number | string;
+  id: string;
   name: string;
   email: string;
   location: string;
@@ -34,7 +34,7 @@ export type CollegeResponse = {
 };
 
 export type StudentType = {
-  id: number | string;
+  id: string;
   name: string;
   email: string;
   phone: string;
@@ -62,7 +62,7 @@ export type ModuleRespone = {
 };
 
 export type ProfessionType = {
-  id: string | number;
+  id: string;
   name: string;
   description: string;
   code: number;
@@ -76,7 +76,7 @@ export type ProfessionResponse = {
 };
 
 export type GroupType = {
-  id: string | number;
+  id: string;
   group_number: number;
   college_id: string | number;
   profession_id: string | number;

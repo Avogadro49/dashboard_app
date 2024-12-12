@@ -48,7 +48,32 @@ const useProfessionItem = () => {
     };
   }, [url]);
 
-  return { responseData, error, isLoading };
+  const deleteProfession = async (id: string) => {
+    try {
+      const response = await fetch(`${url}/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete module");
+      }
+
+      // Update state after deletion
+      setResponseData((prev) =>
+        prev
+          ? {
+              ...prev,
+              data: prev.data.filter((module) => module.id !== id),
+              total: prev.total - 1,
+            }
+          : null
+      );
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error("Unknown error"));
+    }
+  };
+
+  return { responseData, error, isLoading, deleteProfession };
 };
 
 export default useProfessionItem;

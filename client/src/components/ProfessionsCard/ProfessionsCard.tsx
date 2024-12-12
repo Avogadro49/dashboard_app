@@ -5,15 +5,27 @@ import { Box, Button, HStack, Stack, Text } from "@chakra-ui/react";
 
 type ProfessionCardType = {
   profession: ProfessionType;
+  onDelete: (id: string) => void;
 };
 
-const ProfessionsCard: React.FC<ProfessionCardType> = ({ profession }) => {
+const ProfessionsCard: React.FC<ProfessionCardType> = ({
+  profession,
+  onDelete,
+}) => {
   const navigate = useNavigate();
 
   const viewMore = () => {
     navigate(`/professions/${profession.id}`);
   };
 
+  const handleDelete = () => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${profession.name}?`
+    );
+    if (confirmed) {
+      onDelete(profession.id);
+    }
+  };
   return (
     <Box
       w="300px"
@@ -41,7 +53,7 @@ const ProfessionsCard: React.FC<ProfessionCardType> = ({ profession }) => {
         <Button w="50%" onClick={viewMore}>
           View More
         </Button>
-        <Button w="50%" color="red">
+        <Button w="50%" color="red" onClick={handleDelete}>
           Delete
         </Button>
       </HStack>

@@ -4,7 +4,7 @@ import useStudentItem from "../../../hooks/useStudentItem";
 import StudentsCard from "../../../components/StudentsCard/StudentsCard";
 
 const IndexStudents = () => {
-  const { responseData, error, isLoading } = useStudentItem();
+  const { responseData, error, isLoading, deleteStudent } = useStudentItem();
 
   if (isLoading) {
     return (
@@ -15,6 +15,9 @@ const IndexStudents = () => {
   }
   if (error) return <p>Error loading student: {error.message}</p>;
 
+  const handleDelete = (id: string) => {
+    deleteStudent(id);
+  };
   return (
     <Box padding="4" mx="auto">
       <Text fontSize="2xl" fontWeight="bold" marginBottom="4">
@@ -27,7 +30,11 @@ const IndexStudents = () => {
       {responseData && responseData.data.length > 0 ? (
         <Flex direction="row" wrap="wrap" gap="4">
           {responseData.data.map((student) => (
-            <StudentsCard key={student.id} student={student} />
+            <StudentsCard
+              key={student.id}
+              student={student}
+              onDelete={handleDelete}
+            />
           ))}
         </Flex>
       ) : (

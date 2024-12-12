@@ -4,7 +4,7 @@ import useTeacherItem from "../../../hooks/useTeacherItem";
 // import { TeacherType } from "../../../types";
 
 const IndexTeachers = () => {
-  const { responseData, error, isLoading } = useTeacherItem();
+  const { responseData, error, isLoading, deleteTeacher } = useTeacherItem();
   // const { data } = responseData as {
   //   data: TeacherType[];
   // };
@@ -17,7 +17,12 @@ const IndexTeachers = () => {
       </Center>
     );
   }
+
   if (error) return <p>Error loading teachers: {error.message}</p>;
+
+  const handleDelete = (id: string) => {
+    deleteTeacher(id);
+  };
   return (
     <Box padding="4" mx="auto">
       <Text fontSize="2xl" fontWeight="bold" marginBottom="4">
@@ -30,7 +35,11 @@ const IndexTeachers = () => {
       {responseData && responseData.data.length > 0 ? (
         <Flex direction="row" wrap="wrap" gap="4">
           {responseData.data.map((teacher) => (
-            <TeachersCard key={teacher.id} teacher={teacher} />
+            <TeachersCard
+              key={teacher.id}
+              teacher={teacher}
+              onDelete={handleDelete}
+            />
           ))}
         </Flex>
       ) : (

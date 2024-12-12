@@ -3,10 +3,14 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import ProfessionsCard from "../../../components/ProfessionsCard/ProfessionsCard";
 
 const IndexProfessions = () => {
-  const { responseData, error, isLoading } = useProfessionItem();
+  const { responseData, error, isLoading, deleteProfession } =
+    useProfessionItem();
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading college: {error.message}</p>;
 
+  const handleDelete = (id: string) => {
+    deleteProfession(id);
+  };
   return (
     <Box padding="4" mx="auto">
       <Text fontSize="2xl" fontWeight="bold" marginBottom="4">
@@ -15,7 +19,11 @@ const IndexProfessions = () => {
       {responseData && responseData.data.length > 0 ? (
         <Flex direction="row" wrap="wrap" gap="4">
           {responseData.data.map((profession) => (
-            <ProfessionsCard key={profession.id} profession={profession} />
+            <ProfessionsCard
+              key={profession.id}
+              profession={profession}
+              onDelete={handleDelete}
+            />
           ))}
         </Flex>
       ) : (
